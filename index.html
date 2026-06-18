@@ -1,380 +1,1043 @@
 <!DOCTYPE html>
+
 <html lang="lv">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VSAA – Latvija.lv</title>
+
+<title>E-iesniegums VSAA pakalpojumiem – Latvija.lv</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;font-size:14px;color:#222;background:#fff}
 
-.topbar{background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;padding:0 24px;height:56px}
-.logo{font-size:22px;font-weight:700;color:#1a1a1a;padding-right:20px;border-right:1px solid #ddd;white-space:nowrap;display:flex;align-items:center}
-.logo .dot{display:inline-block;width:10px;height:10px;background:#8b1a2e;border-radius:50%;margin:0 1px;vertical-align:middle;position:relative;top:-1px}
-.topbar-mid{display:flex;align-items:center;gap:14px;padding:0 18px;border-right:1px solid #ddd;height:100%}
-.aaa-btn{font-size:13px;font-weight:600;color:#333;cursor:pointer;background:none;border:none}
-.contrast-btn{width:22px;height:22px;border-radius:50%;background:linear-gradient(90deg,#1a1a1a 50%,#fff 50%);border:1.5px solid #888;cursor:pointer}
-.lang-btn{font-size:13px;font-weight:600;color:#333;cursor:pointer;background:none;border:none;padding:0 4px}
-.mic-btn{font-size:16px;color:#555;cursor:pointer;background:none;border:none}
-.search-wrap{display:flex;align-items:center;flex:1;padding:0 16px;gap:10px;border-right:1px solid #ddd;height:100%}
-.search-input{border:none;outline:none;font-size:14px;color:#aaa;background:transparent;width:100%}
-.search-icon{color:#8b1a2e;font-size:18px}
-.user-area{display:flex;align-items:center;gap:10px;padding-left:16px;cursor:pointer}
-.user-avatar{width:36px;height:36px;border-radius:50%;background:#5b8ec4;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
-.user-name{font-size:13px;font-weight:600;color:#1a1a1a}
-.user-role{font-size:11px;color:#666}
-.caret{font-size:12px;color:#555;margin-left:4px}
+, ::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-.mainnav{background:#8b1a2e;display:flex;align-items:center;height:44px;padding:0 24px}
-.mainnav a{color:#fff;text-decoration:none;font-size:14px;font-weight:500;padding:0 22px;height:100%;display:flex;align-items:center;white-space:nowrap;cursor:pointer}
-.mainnav a:hover{background:rgba(0,0,0,0.15)}
-.mainnav a.home{padding:0 18px;font-size:18px}
+body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a1a; background: #fff; }
 
-/* PAGE */
-.page{max-width:720px;margin:0 auto;padding:32px 24px 80px}
+/* TOPBAR */
 
-.page-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#8b1a2e;margin-bottom:6px}
-.page-title{font-size:24px;font-weight:700;color:#111;margin-bottom:8px}
-.page-desc{font-size:13.5px;color:#666;line-height:1.6;margin-bottom:24px}
+.topbar { background: #fff; border-bottom: 1px solid #d5d5d5; display: flex; align-items: stretch; height: 58px; }
 
-/* PERSONA */
-.persona-bar{background:#f5f5f5;border-radius:4px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:28px}
-.persona-avatar{width:34px;height:34px;border-radius:50%;background:#8b1a2e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.persona-name{font-size:14px;font-weight:600}
-.persona-code{font-size:12px;color:#888}
+.tb-logo { display: flex; align-items: center; padding: 0 22px 0 20px; border-right: 1px solid #d5d5d5; font-size: 23px; font-weight: 700; color: #111; text-decoration: none; flex-shrink: 0; }
 
-/* SECTION LABEL */
-.sec-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#8b1a2e;margin:24px 0 12px;padding-bottom:5px;border-bottom:1.5px solid #f0e0e3}
+.tb-logo .dot { display: inline-block; width: 11px; height: 11px; background: #8b1a2e; border-radius: 50%; margin: 0 1px; vertical-align: middle; position: relative; top: -2px; }
 
-/* FIELDS */
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.f-group{margin-bottom:12px}
-.f-label{font-size:13px;color:#444;margin-bottom:4px;font-weight:500}
-.f-req{color:#8b1a2e}
-.f-input{width:100%;padding:9px 11px;border:1.5px solid #ddd;border-radius:4px;font-size:13px;font-family:inherit;color:#222;outline:none}
-.f-input:focus{border-color:#8b1a2e}
-.f-input::placeholder{color:#ccc}
+.tb-mid { display: flex; align-items: center; gap: 14px; padding: 0 18px; border-right: 1px solid #d5d5d5; flex-shrink: 0; }
 
-/* CHECKBOX ITEMS */
-.cb-item{border:1.5px solid #e0e0e0;border-radius:4px;margin-bottom:8px;overflow:hidden}
-.cb-item.on{border-color:#8b1a2e}
-.cb-header{display:flex;align-items:center;gap:11px;padding:12px 14px;cursor:pointer;user-select:none}
-.cb-header:hover{background:#fdf5f6}
-.cb-item.on .cb-header{background:#fdf5f6}
-.cb-check{width:17px;height:17px;flex-shrink:0;accent-color:#8b1a2e;cursor:pointer}
-.cb-label{font-size:14px;font-weight:500;color:#222}
-.cb-item.on .cb-label{color:#8b1a2e}
+.tb-mid button { font-size: 13px; font-weight: 600; color: #2a2a2a; background: none; border: none; cursor: pointer; font-family: inherit; }
 
-.cb-body{display:none;padding:14px 14px 16px 42px;border-top:1px solid #f0e0e3;background:#fffafb}
-.cb-item.on .cb-body{display:block}
+.tb-contrast { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(90deg, #111 50%, #fff 50%); border: 1.5px solid #999; cursor: pointer; flex-shrink: 0; }
 
-.sub-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.sub-group{margin-bottom:10px}
-.sub-label{font-size:12px;color:#555;margin-bottom:3px;font-weight:500}
-.sub-input{width:100%;padding:8px 10px;border:1.5px solid #e0d0d3;border-radius:4px;font-size:13px;font-family:inherit;outline:none;background:#fff}
-.sub-input:focus{border-color:#8b1a2e}
-.sub-input::placeholder{color:#ccc}
-.sub-textarea{width:100%;padding:8px 10px;border:1.5px solid #e0d0d3;border-radius:4px;font-size:13px;font-family:inherit;outline:none;background:#fff;resize:vertical;min-height:64px}
-.sub-textarea:focus{border-color:#8b1a2e}
+.tb-search { display: flex; align-items: center; flex: 1; padding: 0 16px; gap: 10px; border-right: 1px solid #d5d5d5; }
+
+.tb-search input { border: none; outline: none; font-size: 14px; color: #aaa; background: transparent; width: 100%; font-family: inherit; }
+
+.tb-search .si { font-size: 19px; color: #8b1a2e; cursor: pointer; }
+
+.tb-user { display: flex; align-items: center; gap: 10px; padding: 0 18px; cursor: pointer; flex-shrink: 0; background: #f4f4f4; }
+
+.tb-avatar { width: 34px; height: 34px; border-radius: 50%; background: #4e82c4; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 17px; flex-shrink: 0; }
+
+.tb-uname { font-size: 13px; font-weight: 500; color: #111; line-height: 1.3; }
+
+.tb-urole { font-size: 11px; color: #666; }
+
+.tb-caret { font-size: 11px; color: #666; }
+
+/* MAINNAV */
+
+.mainnav { background: #8b1a2e; display: flex; align-items: stretch; height: 44px; padding: 0 8px; }
+
+.mainnav a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; padding: 0 20px; display: flex; align-items: center; cursor: pointer; white-space: nowrap; transition: background 0.12s; }
+
+.mainnav a:hover { background: rgba(0,0,0,0.14); }
+
+.mainnav a.home { font-size: 18px; padding: 0 18px; }
+
+/* BREADCRUMB */
+
+.bc-bar { border-bottom: 1px solid #e8e8e8; }
+
+.bc { max-width: 960px; margin: 0 auto; padding: 11px 24px; font-size: 13px; color: #555; }
+
+.bc a { color: #8b1a2e; text-decoration: none; cursor: pointer; }
+
+.bc a:hover { text-decoration: underline; }
+
+.bc .sep { margin: 0 6px; color: #bbb; }
+
+/* OUTER */
+
+.outer { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+/* PAGE HEADER */
+
+.pg-head { padding: 28px 0 0; }
+
+.pg-title { font-size: 22px; font-weight: 700; color: #111; margin-bottom: 20px; }
+
+/* STEPPER */
+
+.stepper { display: flex; align-items: center; gap: 7px; padding-bottom: 26px; }
+
+.sn { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #c0c0c0; background: #fff; color: #aaa; font-size: 13px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+.sn.act { background: #484848; border-color: #484848; color: #fff; font-weight: 600; }
+
+.s-lbl { font-size: 13.5px; color: #222; margin-right: 4px; }
+
+.s-r { margin-left: auto; }
+
+.btn-inst { padding: 8px 18px; border-radius: 22px; border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; }
+
+.btn-inst:hover { background: #fdf5f6; }
+
+/* ALERT BAR */
+
+.alert-bar { background: #616161; color: #fff; display: flex; align-items: center; gap: 10px; padding: 11px 16px; font-size: 13px; }
+
+.alert-bar .aico { color: #f5b800; font-size: 14px; flex-shrink: 0; }
+
+/* FORM BODY */
+
+.fbody { padding: 22px 0 0; }
+
+.sec-h { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 14px; }
+
+.sec-sub { font-size: 13.5px; color: #333; margin-bottom: 4px; }
+
+.sec-sub-i { font-size: 13px; color: #555; font-style: italic; margin-bottom: 18px; }
+
+/* DIVIDER */
+
+.dv { border: none; border-top: 1px solid #e0e0e0; margin: 22px 0; }
+
+/* FIELD ROW */
+
+.fr { display: flex; align-items: flex-start; gap: 0; margin-bottom: 13px; }
+
+.fl { width: 310px; min-width: 260px; flex-shrink: 0; font-size: 13.5px; color: #222; padding-top: 9px; padding-right: 14px; line-height: 1.4; }
+
+.fl .r { color: #8b1a2e; font-weight: 700; }
+
+.fl .ti { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%; border: 1.5px solid #999; color: #777; font-size: 11px; font-weight: 700; cursor: pointer; margin-left: 2px; vertical-align: middle; }
+
+.fv { flex: 1; }
+
+.fv input, .fv textarea { width: 100%; border: 1px solid #ccc; border-radius: 3px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.15s; }
+
+.fv input:focus, .fv textarea:focus { border-color: #8b1a2e; }
+
+.fv input.n { max-width: 180px; }
+
+.fv input.m { max-width: 340px; }
+
+.fv .dr { display: flex; align-items: center; gap: 6px; }
+
+.fv .dr input { max-width: 180px; }
+
+.fv .dr .cal { font-size: 17px; color: #8b1a2e; cursor: pointer; }
+
+.fv .pkr { display: flex; align-items: center; gap: 5px; }
+
+.fv .pkr input:first-child { max-width: 130px; }
+
+.fv .pkr input:last-child { max-width: 100px; }
+
+.fv .pkr .dsh { font-size: 17px; color: #444; font-weight: 300; margin: 0 1px; }
+
+.fv .hint { font-size: 12px; color: #777; margin-top: 3px; font-style: italic; }
+
+/* CHECKBOX BLOCKS */
+
+.cb-blk { background: #f5f5f5; border-radius: 3px; margin-bottom: 6px; overflow: hidden; }
+
+.cb-trig { display: flex; align-items: flex-start; gap: 11px; padding: 13px 16px; cursor: pointer; transition: background 0.1s; user-select: none; }
+
+.cb-trig:hover { background: #ebebeb; }
+
+.cb-trig input[type=checkbox] { width: 17px; height: 17px; margin-top: 2px; accent-color: #8b1a2e; cursor: pointer; flex-shrink: 0; }
+
+.cb-txt { flex: 1; font-size: 13.5px; color: #222; line-height: 1.5; }
+
+.cb-txt .sub { font-size: 12.5px; color: #666; display: block; margin-top: 2px; font-weight: 400; font-style: italic; }
+
+.cb-bdy { display: none; padding: 6px 20px 20px 44px; background: #fff; border-top: 1px solid #eee; }
+
+.cb-blk.open .cb-bdy { display: block; }
+
+.cb-bdy .fr:first-child { margin-top: 14px; }
+
+/* ADD BUTTON */
+
+.btn-add { display: inline-flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 20px; border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; margin-top: 6px; }
+
+.btn-add:hover { background: #fdf5f6; }
+
+/* CHILD CARD */
+
+.ch-card { border: 1px solid #e0e0e0; border-radius: 3px; padding: 12px 14px 10px; margin-bottom: 8px; position: relative; background: #fff; }
+
+.ch-ttl { font-size: 12.5px; font-weight: 700; color: #666; margin-bottom: 10px; }
+
+.btn-rm { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 16px; color: #bbb; cursor: pointer; line-height: 1; }
+
+.btn-rm:hover { color: #8b1a2e; }
+
+/* BANK INNER */
+
+.bank-blk { margin-top: 14px; padding-top: 14px; border-top: 1px solid #eee; }
+
+.bank-lbl { font-size: 12.5px; font-weight: 700; color: #666; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
+
+/* DOCS */
+
+.docs-note { font-size: 12.5px; color: #666; font-style: italic; margin-bottom: 10px; }
+
+.doc-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+
+.doc-row input { flex: 1; border: 1px solid #ccc; border-radius: 3px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; outline: none; }
+
+.doc-row input:focus { border-color: #8b1a2e; }
+
+.btn-rmd { background: none; border: none; font-size: 17px; color: #bbb; cursor: pointer; }
+
+.btn-rmd:hover { color: #8b1a2e; }
 
 /* PRIVACY */
-.privacy-row{display:flex;align-items:flex-start;gap:10px;background:#fdf5f6;border:1.5px solid #e8d0d5;border-radius:4px;padding:12px 14px;margin-top:20px}
-.privacy-cb{width:17px;height:17px;flex-shrink:0;accent-color:#8b1a2e;margin-top:2px;cursor:pointer}
-.privacy-txt{font-size:12.5px;color:#555;line-height:1.6}
-.privacy-txt a{color:#8b1a2e;text-decoration:underline;cursor:pointer}
 
-/* FOOTER */
-.form-footer{margin-top:24px;display:flex;gap:10px}
-.btn-submit{padding:10px 28px;border-radius:22px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:#8b1a2e;color:#fff;font-family:inherit}
-.btn-submit:hover{background:#6e1524}
-.btn-back{padding:10px 20px;border-radius:22px;font-size:14px;font-weight:500;cursor:pointer;border:none;background:#c8c8c8;color:#fff;font-family:inherit}
+.priv-row { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: #f5f5f5; border-radius: 3px; margin-top: 14px; font-size: 13px; color: #333; line-height: 1.6; }
 
-/* SUCCESS */
-.success{text-align:center;padding:60px 24px}
-.success-icon{font-size:52px;margin-bottom:14px}
-.success-title{font-size:20px;font-weight:700;color:#1e7e44;margin-bottom:8px}
-.success-msg{font-size:14px;color:#555;line-height:1.6;margin-bottom:16px}
-.success-ref{display:inline-block;background:#f5f5f5;border:1.5px solid #ddd;border-radius:4px;padding:7px 18px;font-size:13px;font-weight:700;font-family:monospace;margin-bottom:24px}
+.priv-row input { width: 17px; height: 17px; margin-top: 3px; accent-color: #8b1a2e; flex-shrink: 0; cursor: pointer; }
+
+.priv-row a { color: #8b1a2e; }
+
+/* BOTTOM BUTTONS */
+
+.btns { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
+
+.btn-bk { padding: 10px 24px; border-radius: 22px; font-size: 14px; border: none; background: #c5c5c5; color: #fff; cursor: pointer; font-family: inherit; font-weight: 500; }
+
+.btn-bk:hover { background: #b0b0b0; }
+
+.btn-fw { padding: 10px 28px; border-radius: 22px; font-size: 14px; border: 2px solid #8b1a2e; background: #8b1a2e; color: #fff; cursor: pointer; font-family: inherit; font-weight: 600; }
+
+.btn-fw:hover { background: #6d1524; border-color: #6d1524; }
+
+/* ERROR LINE */
+
+.erl { display: flex; align-items: flex-start; gap: 8px; margin-top: 24px; font-size: 13px; color: #555; }
+
+.eico { color: #f0a800; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+
+.klnk { color: #8b1a2e; font-weight: 600; text-decoration: none; cursor: pointer; }
+
+.urn { font-size: 11px; color: #aaa; margin-top: 2px; }
+
+@media (max-width: 680px) {
+
+  .fr { flex-direction: column; }
+
+  .fl { width: 100%; padding-top: 0; padding-right: 0; margin-bottom: 4px; }
+
+  .cb-bdy { padding: 6px 12px 16px 12px; }
+
+  .outer { padding: 0 12px; }
+
+}
+
 </style>
+
 </head>
+
 <body>
 
+<!-- TOPBAR -->
+
 <div class="topbar">
-  <div class="logo">Latv<span class="dot"></span>ja.lv</div>
-  <div class="topbar-mid">
-    <button class="aaa-btn">AAA</button>
-    <div class="contrast-btn"></div>
-    <button class="lang-btn">EN</button>
-    <button class="mic-btn">&#127908;</button>
+
+  <a class="tb-logo">Latv<span class="dot"></span>ja.lv</a>
+
+  <div class="tb-mid">
+
+    <button>AAA</button>
+
+    <div class="tb-contrast"></div>
+
+    <button>EN</button>
+
+    <button style="font-size:16px;background:none;border:none;cursor:pointer;">🎤</button>
+
   </div>
-  <div class="search-wrap">
-    <input class="search-input" type="text" placeholder="Meklēt portālā...">
-    <span class="search-icon">&#128269;</span>
+
+  <div class="tb-search">
+
+    <input type="text" placeholder="Meklēt portālā...">
+
+    <span class="si">🔍</span>
+
   </div>
-  <div class="user-area">
-    <div class="user-avatar">&#128100;</div>
+
+  <div class="tb-user">
+
+    <div class="tb-avatar">👤</div>
+
     <div>
-      <div class="user-name">Jānis Bērziņš</div>
-      <div class="user-role">Privātpersona</div>
+
+      <div class="tb-uname">Jānis Bērziņš</div>
+
+      <div class="tb-urole">Fiziska persona</div>
+
     </div>
-    <span class="caret">&#9660;</span>
+
+    <span class="tb-caret">▾</span>
+
   </div>
+
 </div>
+
+<!-- MAINNAV -->
 
 <nav class="mainnav">
-  <a class="home">&#127968;</a>
+
+  <a class="home">🏠</a>
+
   <a><strong>Pakalpojumi</strong></a>
+
   <a><strong>Dzīves situācijas</strong></a>
+
   <a><strong>E-adrese</strong></a>
+
 </nav>
 
-<div class="page" id="formPage">
-  <div class="page-tag">VSAA · Iesniegums</div>
-  <div class="page-title">Paziņojums par izmaiņām</div>
-  <div class="page-desc">Aizpildiet zemāk esošos laukus un atzīmējiet visas izmaiņas, par kurām vēlaties paziņot VSAA. Atzīmētās sadaļas izvērsīsies automātiski.</div>
+<!-- BREADCRUMB -->
 
-  <div class="persona-bar">
-    <div class="persona-avatar">&#128100;</div>
-    <div>
-      <div class="persona-name">Jānis Bērziņš</div>
-      <div class="persona-code">Personas kods: 010180-12345</div>
-    </div>
+<div class="bc-bar">
+
+  <div class="bc outer">
+
+    <a>Sākums</a><span class="sep">›</span>
+
+    <a>E-pakalpojumi</a><span class="sep">›</span>
+
+    E-iesniegums VSAA pakalpojumiem
+
   </div>
 
-  <div class="sec-label">Iesniedzēja dati</div>
-
-  <div class="f-row">
-    <div class="f-group">
-      <div class="f-label">Vārds <span class="f-req">*</span></div>
-      <input class="f-input" type="text" value="Jānis">
-    </div>
-    <div class="f-group">
-      <div class="f-label">Uzvārds <span class="f-req">*</span></div>
-      <input class="f-input" type="text" value="Bērziņš">
-    </div>
-  </div>
-
-  <div class="f-row">
-    <div class="f-group">
-      <div class="f-label">E-pasta adrese <span class="f-req">*</span></div>
-      <input class="f-input" type="email" placeholder="epasts@piemers.lv">
-    </div>
-    <div class="f-group">
-      <div class="f-label">Tālrunis</div>
-      <input class="f-input" type="text" placeholder="+371 2X XXX XXX">
-    </div>
-  </div>
-
-  <div class="f-group">
-    <div class="f-label">Deklarētā dzīvesvietas adrese <span class="f-req">*</span></div>
-    <input class="f-input" type="text" placeholder="Iela, māja, dzīvoklis, pilsēta, pasta indekss">
-  </div>
-
-  <div class="sec-label">Atzīmējiet visas izmaiņas, par kurām paziņojat</div>
-
-  <!-- 1 -->
-  <div class="cb-item" id="c1">
-    <div class="cb-header" onclick="tog('c1')">
-      <input type="checkbox" class="cb-check" onclick="tog('c1',event)">
-      <span class="cb-label">Dzīvesvietas adreses maiņa</span>
-    </div>
-    <div class="cb-body">
-      <div class="sub-group">
-        <div class="sub-label">Jaunā adrese</div>
-        <input class="sub-input" type="text" placeholder="Pilna jaunā adrese">
-      </div>
-      <div class="sub-row">
-        <div class="sub-group">
-          <div class="sub-label">Maiņas datums</div>
-          <input class="sub-input" type="date">
-        </div>
-        <div class="sub-group">
-          <div class="sub-label">Faktiskā adrese (ja atšķiras)</div>
-          <input class="sub-input" type="text" placeholder="Aizpildīt, ja atšķiras">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2 -->
-  <div class="cb-item" id="c2">
-    <div class="cb-header" onclick="tog('c2')">
-      <input type="checkbox" class="cb-check" onclick="tog('c2',event)">
-      <span class="cb-label">Citas valsts pensija, pabalsts vai atlīdzība</span>
-    </div>
-    <div class="cb-body">
-      <div class="sub-row">
-        <div class="sub-group">
-          <div class="sub-label">Valsts</div>
-          <input class="sub-input" type="text" placeholder="Piemēram: Vācija">
-        </div>
-        <div class="sub-group">
-          <div class="sub-label">Pakalpojuma veids</div>
-          <input class="sub-input" type="text" placeholder="Pensija, pabalsts...">
-        </div>
-      </div>
-      <div class="sub-row">
-        <div class="sub-group">
-          <div class="sub-label">Sākuma datums</div>
-          <input class="sub-input" type="date">
-        </div>
-        <div class="sub-group">
-          <div class="sub-label">Beigu datums (ja ir)</div>
-          <input class="sub-input" type="date">
-        </div>
-      </div>
-      <div class="sub-group">
-        <div class="sub-label">Saņēmēja vārds, uzvārds</div>
-        <input class="sub-input" type="text" placeholder="Vārds Uzvārds">
-      </div>
-    </div>
-  </div>
-
-  <!-- 3 -->
-  <div class="cb-item" id="c3">
-    <div class="cb-header" onclick="tog('c3')">
-      <input type="checkbox" class="cb-check" onclick="tog('c3',event)">
-      <span class="cb-label">Nodarbinātība citā valstī</span>
-    </div>
-    <div class="cb-body">
-      <div class="sub-row">
-        <div class="sub-group">
-          <div class="sub-label">Valsts</div>
-          <input class="sub-input" type="text" placeholder="Darba valsts">
-        </div>
-        <div class="sub-group">
-          <div class="sub-label">Darba devēja nosaukums</div>
-          <input class="sub-input" type="text" placeholder="Uzņēmuma nosaukums">
-        </div>
-      </div>
-      <div class="sub-row">
-        <div class="sub-group">
-          <div class="sub-label">Sākuma datums</div>
-          <input class="sub-input" type="date">
-        </div>
-        <div class="sub-group">
-          <div class="sub-label">Beigu datums (ja ir)</div>
-          <input class="sub-input" type="date">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4 -->
-  <div class="cb-item" id="c4">
-    <div class="cb-header" onclick="tog('c4')">
-      <input type="checkbox" class="cb-check" onclick="tog('c4',event)">
-      <span class="cb-label">Bērna mācības vai apgādnieka zaudējuma pensija / pabalsts</span>
-    </div>
-    <div class="cb-body">
-      <div class="sub-row">
-        <div class="sub-group">
-          <div class="sub-label">Valsts</div>
-          <input class="sub-input" type="text" placeholder="Mācību iestādes valsts">
-        </div>
-        <div class="sub-group">
-          <div class="sub-label">Izglītības veids</div>
-          <input class="sub-input" type="text" placeholder="Bakalaurs, maģistrs...">
-        </div>
-      </div>
-      <div class="sub-row">
-        <div class="sub-group">
-          <div class="sub-label">Sākuma datums</div>
-          <input class="sub-input" type="date">
-        </div>
-        <div class="sub-group">
-          <div class="sub-label">Beigu datums</div>
-          <input class="sub-input" type="date">
-        </div>
-      </div>
-      <div class="sub-group">
-        <div class="sub-label">Bērna vārds, uzvārds</div>
-        <input class="sub-input" type="text" placeholder="Vārds Uzvārds">
-      </div>
-    </div>
-  </div>
-
-  <!-- 5 -->
-  <div class="cb-item" id="c5">
-    <div class="cb-header" onclick="tog('c5')">
-      <input type="checkbox" class="cb-check" onclick="tog('c5',event)">
-      <span class="cb-label">Bankas konta maiņa pensijas vai pabalsta saņemšanai</span>
-    </div>
-    <div class="cb-body">
-      <div class="sub-group">
-        <div class="sub-label">Pensijas / pabalsta veids <span class="f-req">*</span></div>
-        <input class="sub-input" type="text" placeholder="Vecuma pensija, pabalsts...">
-      </div>
-      <div class="sub-group">
-        <div class="sub-label">Kredītiestādes nosaukums</div>
-        <input class="sub-input" type="text" placeholder="Bankas nosaukums">
-      </div>
-      <div class="sub-row">
-        <div class="sub-group">
-          <div class="sub-label">BIC / SWIFT</div>
-          <input class="sub-input" type="text" placeholder="XXXXXXXX">
-        </div>
-        <div class="sub-group">
-          <div class="sub-label">IBAN</div>
-          <input class="sub-input" type="text" placeholder="LVXX XXXX XXXX XXXX XXXX X">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6 -->
-  <div class="cb-item" id="c6">
-    <div class="cb-header" onclick="tog('c6')">
-      <input type="checkbox" class="cb-check" onclick="tog('c6',event)">
-      <span class="cb-label">Citas izmaiņas</span>
-    </div>
-    <div class="cb-body">
-      <div class="sub-group">
-        <div class="sub-label">Aprakstiet izmaiņas</div>
-        <textarea class="sub-textarea" placeholder="Papildu informācija..."></textarea>
-      </div>
-    </div>
-  </div>
-
-  <div class="privacy-row">
-    <input type="checkbox" class="privacy-cb" id="priv">
-    <div class="privacy-txt">Apliecinu, ka esmu iepazinies/-usies ar VSAA <a>privātuma politiku</a> (www.vsaa.gov.lv) un piekrītu savu personas datu apstrādei.</div>
-  </div>
-
-  <div class="form-footer">
-    <button class="btn-submit" onclick="submit()">Iesniegt</button>
-  </div>
 </div>
 
-<div class="page" id="successPage" style="display:none">
-  <div class="success">
-    <div class="success-icon">✅</div>
-    <div class="success-title">Iesniegums nosūtīts!</div>
-    <div class="success-msg">Jūsu paziņojums par izmaiņām ir veiksmīgi iesniegts VSAA.<br>Apstiprinājums tiks nosūtīts uz jūsu e-pastu.</div>
-    <div class="success-ref" id="refnr"></div>
-    <div style="font-size:13px;color:#888;margin-bottom:24px">Izskatīšanas termiņš: <strong>15 darba dienas</strong></div>
-    <button class="btn-submit" onclick="document.getElementById('successPage').style.display='none';document.getElementById('formPage').style.display='block';window.scrollTo(0,0)">Atgriezties</button>
+<!-- PAGE -->
+
+<div class="outer">
+
+  <div class="pg-head">
+
+    <div class="pg-title">E-iesniegums VSAA pakalpojumiem</div>
+
+    <div class="stepper">
+
+      <div class="sn">1.</div>
+
+      <div class="sn act">2.</div>
+
+      <span class="s-lbl">Datu ievade</span>
+
+      <div class="sn">3.</div>
+
+      <div class="s-r"><button class="btn-inst">? Instrukcija</button></div>
+
+    </div>
+
   </div>
+
+  <!-- ALERT -->
+
+  <div class="alert-bar">
+
+    <span class="aico">▲</span>
+
+    Ar zvaigznīti (*) atzīmētie lauki ir jāaizpilda obligāti.
+
+  </div>
+
+  <div class="fbody">
+
+    <div class="sec-h" style="margin-top:20px;">PAZIŅOJUMS</div>
+
+    <div class="sec-sub">PAR IZMAIŅĀM privātās vai darba dzīves apstākļos</div>
+
+    <div class="sec-sub-i">(personām, kuras dzīvo ārvalstī un saņem<br>Valsts sociālās apdrošināšanas aģentūras pakalpojumus)</div>
+
+    <div class="fr">
+
+      <div class="fl" style="font-weight:600;">Valsts sociālās apdrošināšanas aģentūrai</div>
+
+      <div class="fv" style="padding-top:9px;font-size:13.5px;color:#555;"></div>
+
+    </div>
+
+    <hr class="dv">
+
+    <div class="sec-h">Iesniedzēja dati</div>
+
+    <div class="fr">
+
+      <div class="fl">20&nbsp;&nbsp;.gada&nbsp;&nbsp;. <span class="r">*</span></div>
+
+      <div class="fv">
+
+        <div class="dr">
+
+          <input type="text" placeholder="dd.mm.gggg." class="n">
+
+          <span class="cal">📅</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="fr">
+
+      <div class="fl">Vārds, Uzvārds <span class="r">*</span></div>
+
+      <div class="fv"><input type="text"></div>
+
+    </div>
+
+    <div class="fr">
+
+      <div class="fl">Personas kods <span class="r">*</span></div>
+
+      <div class="fv">
+
+        <div class="pkr">
+
+          <input type="text" placeholder="______" maxlength="6">
+
+          <span class="dsh">-</span>
+
+          <input type="text" placeholder="_____" maxlength="5">
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="fr">
+
+      <div class="fl">Tālrunis <span class="r">*</span></div>
+
+      <div class="fv"><input type="tel" class="m"></div>
+
+    </div>
+
+    <div class="fr">
+
+      <div class="fl">E-pasta adrese</div>
+
+      <div class="fv"><input type="email" class="m"></div>
+
+    </div>
+
+    <div class="fr">
+
+      <div class="fl">Dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
+
+      <div class="fv">
+
+        <input type="text">
+
+        <div class="hint">(norādīt pilnu adresi)</div>
+
+      </div>
+
+    </div>
+
+    <div class="fr">
+
+      <div class="fl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</div>
+
+      <div class="fv"><input type="text" class="m"></div>
+
+    </div>
+
+    <hr class="dv">
+
+    <div class="sec-h">Informēju par (norādīt attiecīgās izmaiņas):</div>
+
+    <!-- 1 — open -->
+
+    <div class="cb-blk open" id="b1">
+
+      <div class="cb-trig" onclick="tog('b1',this)">
+
+        <input type="checkbox" checked onchange="syn('b1',this)" onclick="event.stopPropagation()">
+
+        <div class="cb-txt">savas dzīvesvietas ārvalstī maiņu, kuras adrese norādīta šajā iesniegumā</div>
+
+      </div>
+
+      <div class="cb-bdy">
+
+        <div class="fr">
+
+          <div class="fl">Jaunā dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
+
+          <div class="fv">
+
+            <input type="text">
+
+            <div class="hint">(norādīt pilnu adresi)</div>
+
+          </div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">Maiņas datums <span class="r">*</span></div>
+
+          <div class="fv">
+
+            <div class="dr"><input type="text" placeholder="dd.mm.gggg." class="n"><span class="cal">📅</span></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 2 -->
+
+    <div class="cb-blk" id="b2">
+
+      <div class="cb-trig" onclick="tog('b2',this)">
+
+        <input type="checkbox" onchange="syn('b2',this)" onclick="event.stopPropagation()">
+
+        <div class="cb-txt">
+
+          bērna/u dzīvesvietas adreses maiņu
+
+          <span class="sub">(norādīt pilnu adresi, ja bērna dzīvesvietas adrese atšķiras no iesniedzēja adreses un Latvijā par bērnu saņem pabalstus vai pensiju)</span>
+
+        </div>
+
+      </div>
+
+      <div class="cb-bdy">
+
+        <div id="blist"></div>
+
+        <button class="btn-add" type="button" onclick="addB()">Pievienot nākamo</button>
+
+      </div>
+
+    </div>
+
+    <!-- 3 -->
+
+    <div class="cb-blk" id="b3">
+
+      <div class="cb-trig" onclick="tog('b3',this)">
+
+        <input type="checkbox" onchange="syn('b3',this)" onclick="event.stopPropagation()">
+
+        <div class="cb-txt">
+
+          citas valsts pensijas/pabalstu/atlīdzības saņemšanu *
+
+          <span class="sub">* Jāpievieno informācijas izmaiņas apliecinoši dokumenti, ja tādi ir</span>
+
+        </div>
+
+      </div>
+
+      <div class="cb-bdy">
+
+        <div class="fr">
+
+          <div class="fl">valsts <span class="r">*</span></div>
+
+          <div class="fv"><input type="text" class="m"></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">pakalpojuma veids <span class="r">*</span></div>
+
+          <div class="fv"><input type="text"></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">sākuma datums <span class="r">*</span></div>
+
+          <div class="fv"><div class="dr"><input type="text" placeholder="dd.mm.gggg." class="n"><span class="cal">📅</span></div></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">beigu datums (ja tāds ir)</div>
+
+          <div class="fv"><div class="dr"><input type="text" placeholder="dd.mm.gggg." class="n"><span class="cal">📅</span></div></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">bērna vārds/uzvārds</div>
+
+          <div class="fv">
+
+            <input type="text" class="m">
+
+            <div class="hint">(ja citā valstī saņem pabalstus vai pensiju par bērnu)</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 4 -->
+
+    <div class="cb-blk" id="b4">
+
+      <div class="cb-trig" onclick="tog('b4',this)">
+
+        <input type="checkbox" onchange="syn('b4',this)" onclick="event.stopPropagation()">
+
+        <div class="cb-txt">
+
+          nodarbinātību vai pašnodarbinātību citā valstī
+
+          <span class="sub">(aizpilda, ja Latvijā saņem kādu no pabalstiem vai pensiju priekšlaicīgi)</span>
+
+        </div>
+
+      </div>
+
+      <div class="cb-bdy">
+
+        <div class="fr">
+
+          <div class="fl">valsts <span class="r">*</span></div>
+
+          <div class="fv"><input type="text" class="m"></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">darba devēja nosaukums</div>
+
+          <div class="fv">
+
+            <input type="text">
+
+            <div class="hint">(aizpilda, ja ir darba ņēmējs)</div>
+
+          </div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">sākuma datums <span class="r">*</span></div>
+
+          <div class="fv"><div class="dr"><input type="text" placeholder="dd.mm.gggg." class="n"><span class="cal">📅</span></div></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">beigu datums (ja tāds ir)</div>
+
+          <div class="fv"><div class="dr"><input type="text" placeholder="dd.mm.gggg." class="n"><span class="cal">📅</span></div></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 5 -->
+
+    <div class="cb-blk" id="b5">
+
+      <div class="cb-trig" onclick="tog('b5',this)">
+
+        <input type="checkbox" onchange="syn('b5',this)" onclick="event.stopPropagation()">
+
+        <div class="cb-txt">
+
+          mācībām citā valstī *
+
+          <span class="sub">(aizpilda, ja saņem apgādnieka zaudējuma pensiju par sevi vai bērnu vai pabalstus par bērnu)</span>
+
+        </div>
+
+      </div>
+
+      <div class="cb-bdy">
+
+        <div class="fr">
+
+          <div class="fl">valsts <span class="r">*</span></div>
+
+          <div class="fv"><input type="text" class="m"></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">mācību iestāde <span class="r">*</span></div>
+
+          <div class="fv"><input type="text"></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">izglītības veids <span class="r">*</span></div>
+
+          <div class="fv"><input type="text" class="m"></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">sākuma datums <span class="r">*</span></div>
+
+          <div class="fv"><div class="dr"><input type="text" placeholder="dd.mm.gggg." class="n"><span class="cal">📅</span></div></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">beigu datums (ja tāds ir)</div>
+
+          <div class="fv"><div class="dr"><input type="text" placeholder="dd.mm.gggg." class="n"><span class="cal">📅</span></div></div>
+
+        </div>
+
+        <div class="fr">
+
+          <div class="fl">bērna vārds/uzvārds (par kuru saņem pakalpojumu)</div>
+
+          <div class="fv"><input type="text" class="m"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 6 — open -->
+
+    <div class="cb-blk open" id="b6">
+
+      <div class="cb-trig" onclick="tog('b6',this)">
+
+        <input type="checkbox" checked onchange="syn('b6',this)" onclick="event.stopPropagation()">
+
+        <div class="cb-txt">
+
+          kredītiestādes/maksājumu iestādes konta maiņu uz kuru turpmāk pārskaitīt manu
+
+          <span class="sub">(norādīt Latvijā piešķirtās pensijas/pabalsta/atlīdzības veidu)</span>
+
+        </div>
+
+      </div>
+
+      <div class="cb-bdy">
+
+        <div class="fr">
+
+          <div class="fl">Pensijas/pabalsta/atlīdzības veids <span class="r">*</span></div>
+
+          <div class="fv">
+
+            <input type="text">
+
+            <div class="hint">(norādīt Latvijā piešķirtās pensijas/pabalsta/atlīdzības veidu)</div>
+
+          </div>
+
+        </div>
+
+        <div class="bank-blk">
+
+          <div class="bank-lbl">Jaunā konta dati</div>
+
+          <div class="fr">
+
+            <div class="fl">Kredītiestādes/maksājumu iestādes pilns nosaukums <span class="r">*</span></div>
+
+            <div class="fv"><input type="text"></div>
+
+          </div>
+
+          <div class="fr">
+
+            <div class="fl">BIC vai SWIFT kods <span class="r">*</span></div>
+
+            <div class="fv"><input type="text" class="m"></div>
+
+          </div>
+
+          <div class="fr">
+
+            <div class="fl">Konta Nr. <span class="r">*</span></div>
+
+            <div class="fv"><input type="text" placeholder="LVXX XXXX XXXX XXXX XXXX X"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- 7 -->
+
+    <div class="cb-blk" id="b7">
+
+      <div class="cb-trig" onclick="tog('b7',this)">
+
+        <input type="checkbox" onchange="syn('b7',this)" onclick="event.stopPropagation()">
+
+        <div class="cb-txt">
+
+          citas izmaiņas
+
+          <span class="sub">(aizpilda, ja iesniedzējs VSAA papildus vēlas informēt par citām izmaiņām, kas nav minētas iesniegumā)</span>
+
+        </div>
+
+      </div>
+
+      <div class="cb-bdy">
+
+        <div class="fr">
+
+          <div class="fl">Apraksts <span class="r">*</span></div>
+
+          <div class="fv"><textarea rows="4" style="resize:vertical;"></textarea></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <hr class="dv">
+
+    <div class="sec-h">Iesniegumam pievienoju šādus dokumentus</div>
+
+    <div class="docs-note">* Jāpievieno informācijas izmaiņas apliecinoši dokumenti, ja tādi ir</div>
+
+    <div id="dlist">
+
+      <div class="doc-row">
+
+        <input type="text" placeholder="Dokumenta nosaukums / apraksts">
+
+        <button class="btn-rmd" onclick="rmDoc(this)">✕</button>
+
+      </div>
+
+      <div class="doc-row">
+
+        <input type="text" placeholder="Dokumenta nosaukums / apraksts">
+
+        <button class="btn-rmd" onclick="rmDoc(this)">✕</button>
+
+      </div>
+
+      <div class="doc-row">
+
+        <input type="text" placeholder="Dokumenta nosaukums / apraksts">
+
+        <button class="btn-rmd" onclick="rmDoc(this)">✕</button>
+
+      </div>
+
+    </div>
+
+    <button class="btn-add" type="button" onclick="addDoc()" style="margin-top:4px;">+ Pievienot dokumentu</button>
+
+    <hr class="dv">
+
+    <div class="priv-row">
+
+      <input type="checkbox" id="cbp">
+
+      <label for="cbp">
+
+        Apliecinu, ka esmu iepazinies/-usies ar VSAA privātuma politiku, kas pieejama interneta vietnes <a href="https://www.vsaa.gov.lv" target="_blank">www.vsaa.gov.lv</a> sadaļā "Privātuma politika".
+
+      </label>
+
+    </div>
+
+    <div class="btns">
+
+      <button class="btn-bk" type="button">Atpakaļ</button>
+
+      <button class="btn-fw" type="button" onclick="sub()">Tālāk</button>
+
+    </div>
+
+    <div class="erl">
+
+      <span class="eico">▲</span>
+
+      <div>
+
+        <a class="klnk">Pieteikt e-pakalpojuma kļūdu ›</a>
+
+        <div class="urn">URN:IVIS:100001:EP-VSAA-v1-0-TR-0042</div>
+
+      </div>
+
+    </div>
+
+    <div style="height:50px;"></div>
+
+  </div>
+
 </div>
 
 <script>
-function tog(id, e) {
-  if (e) e.stopPropagation();
-  const item = document.getElementById(id);
-  const cb = item.querySelector('.cb-check');
-  if (e && e.target === cb) {
-    item.classList.toggle('on', cb.checked);
-  } else {
-    cb.checked = !cb.checked;
-    item.classList.toggle('on', cb.checked);
+
+function tog(id, trig) {
+
+  const blk = document.getElementById(id);
+
+  const cb = trig.querySelector('input[type=checkbox]');
+
+  const wasOpen = blk.classList.contains('open');
+
+  blk.classList.toggle('open');
+
+  cb.checked = !wasOpen;
+
+  if (!wasOpen && id === 'b2') initB();
+
+}
+
+function syn(id, cb) {
+
+  const blk = document.getElementById(id);
+
+  if (cb.checked) { blk.classList.add('open'); if (id === 'b2') initB(); }
+
+  else blk.classList.remove('open');
+
+}
+
+function initB() {
+
+  if (document.getElementById('blist').children.length === 0) addB();
+
+}
+
+let bc = 0;
+
+function addB() {
+
+  bc++;
+
+  const lst = document.getElementById('blist');
+
+  const d = document.createElement('div');
+
+  d.className = 'ch-card'; d.id = 'bc' + bc;
+
+  d.innerHTML = `<div class="ch-ttl">Bērns ${bc}</div>
+
+    <button class="btn-rm" onclick="rmB(${bc})">✕</button>
+
+    <div class="fr"><div class="fl">bērna vārds/uzvārds <span class="r">*</span></div>
+
+      <div class="fv"><input type="text" class="m"></div></div>
+
+    <div class="fr"><div class="fl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
+
+      <div class="fv"><input type="text"><div class="hint">(norādīt pilnu adresi)</div></div></div>`;
+
+  lst.appendChild(d);
+
+  renum();
+
+}
+
+function rmB(id) { const e = document.getElementById('bc'+id); if(e) e.remove(); renum(); }
+
+function renum() {
+
+  document.querySelectorAll('#blist .ch-card').forEach((e,i)=>{
+
+    const t=e.querySelector('.ch-ttl'); if(t) t.textContent='Bērns '+(i+1);
+
+  });
+
+}
+
+function addDoc() {
+
+  const lst = document.getElementById('dlist');
+
+  const d = document.createElement('div'); d.className='doc-row';
+
+  d.innerHTML<input type="text" placeholder="Dokumenta nosaukums / apraksts"><button class="btn-rmd" onclick="rmDoc(this)">✕</button>;
+
+  lst.appendChild(d);
+
+}
+
+function rmDoc(btn) {
+
+  const lst=document.getElementById('dlist');
+
+  if(lst.children.length>1) btn.parentElement.remove();
+
+  else btn.previousElementSibling.value='';
+
+}
+
+function sub() {
+
+  if(!document.getElementById('cbp').checked){
+
+    alert('Lūdzu aplieciniet, ka esat iepazinies ar VSAA privātuma politiku.');
+
+    return;
+
   }
+
+  alert('Iesniegums iesniegts. Pārejam uz 3. soli.');
+
 }
-function submit() {
-  document.getElementById('formPage').style.display = 'none';
-  document.getElementById('successPage').style.display = 'block';
-  document.getElementById('refnr').textContent = 'Nr. 2026/' + Math.floor(10000 + Math.random()*89999);
-  window.scrollTo(0,0);
-}
+
 </script>
+
 </body>
+
 </html>
