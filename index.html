@@ -130,6 +130,17 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 .btn-fw { padding: 10px 28px; border-radius: 22px; font-size: 14px; border: 2px solid #8b1a2e; background: #8b1a2e; color: #fff; cursor: pointer; font-family: inherit; font-weight: 600; }
 .btn-fw:hover { background: #6d1524; border-color: #6d1524; }
 
+/* ADDRESS SUB-FIELDS */
+.addr-fields { display: flex; flex-direction: column; gap: 0; }
+.addr-row { display: flex; flex-direction: column; margin-bottom: 12px; }
+.addr-row:last-child { margin-bottom: 0; }
+.addr-lbl { font-size: 13px; color: #333; margin-bottom: 5px; font-weight: 400; }
+.addr-lbl .r { color: #8b1a2e; font-weight: 700; }
+.addr-inp { width: 100%; border: 1px solid #ccc; border-radius: 3px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.15s; }
+.addr-inp:focus { border-color: #8b1a2e; }
+.addr-inp.m { max-width: 340px; }
+.addr-inp.n { max-width: 180px; }
+
 /* ERROR LINE */
 .erl { display: flex; align-items: flex-start; gap: 8px; margin-top: 24px; font-size: 13px; color: #555; }
 .eico { color: #f0a800; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
@@ -211,51 +222,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
     <hr class="dv">
 
-    <div class="sec-h">Iesniedzēja dati</div>
-
-    <div class="fr">
-      <div class="fl">Vārds, Uzvārds <span class="r">*</span></div>
-      <div class="fv"><input type="text"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">Personas kods <span class="r">*</span></div>
-      <div class="fv">
-        <div class="pkr">
-          <input type="text" placeholder="______" maxlength="6">
-          <span class="dsh">-</span>
-          <input type="text" placeholder="_____" maxlength="5">
-        </div>
-      </div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">Tālrunis <span class="r">*</span></div>
-      <div class="fv"><input type="tel" class="m"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">E-pasta adrese</div>
-      <div class="fv"><input type="email" class="m"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">PMLP reģistrētā ārzemju adrese</div>
-      <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">VSAA IS reģistrētā ārzemju adrese</div>
-      <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</div>
-      <div class="fv"><input type="text" class="m"></div>
-    </div>
-
-    <hr class="dv">
-
     <div class="sec-h">Informēju par (norādīt attiecīgās izmaiņas):</div>
 
     <!-- 1 — open -->
@@ -268,22 +234,22 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
         <div class="fr">
           <div class="fl">Jaunā dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
           <div class="fv">
-            <div style="display:flex;flex-direction:column;gap:8px;">
-              <div>
-                <div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Valsts <span class="r">*</span></div>
-                <input type="text" class="m">
+            <div class="addr-fields">
+              <div class="addr-row">
+                <label class="addr-lbl">Valsts <span class="r">*</span></label>
+                <input type="text" class="addr-inp m">
               </div>
-              <div>
-                <div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Iela, mājas Nr. <span class="r">*</span></div>
-                <input type="text">
+              <div class="addr-row">
+                <label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label>
+                <input type="text" class="addr-inp">
               </div>
-              <div>
-                <div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Pilsēta/pagasts, novads <span class="r">*</span></div>
-                <input type="text">
+              <div class="addr-row">
+                <label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label>
+                <input type="text" class="addr-inp">
               </div>
-              <div>
-                <div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Pasta indekss</div>
-                <input type="text" class="n">
+              <div class="addr-row">
+                <label class="addr-lbl">Pasta indekss</label>
+                <input type="text" class="addr-inp n">
               </div>
             </div>
           </div>
@@ -324,7 +290,12 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
       <div class="cb-bdy">
         <div class="fr">
           <div class="fl">valsts <span class="r">*</span></div>
-          <div class="fv"><input type="text" class="m"></div>
+          <div class="fv">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <input type="text" class="m" style="flex:1;">
+              <button type="button" onclick="pieprasitOTIS(this)" style="padding:7px 14px;border-radius:20px;border:1.5px solid #8b1a2e;background:#fff;color:#8b1a2e;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;">Pieprasīt datus OTIS</button>
+            </div>
+          </div>
         </div>
         <div class="fr">
           <div class="fl">pakalpojuma veids <span class="r">*</span></div>
@@ -360,7 +331,12 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
       <div class="cb-bdy">
         <div class="fr">
           <div class="fl">valsts <span class="r">*</span></div>
-          <div class="fv"><input type="text" class="m"></div>
+          <div class="fv">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <input type="text" class="m" style="flex:1;">
+              <button type="button" onclick="pieprasitOTIS(this)" style="padding:7px 14px;border-radius:20px;border:1.5px solid #8b1a2e;background:#fff;color:#8b1a2e;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;">Pieprasīt datus OTIS</button>
+            </div>
+          </div>
         </div>
         <div class="fr">
           <div class="fl">darba devēja nosaukums</div>
@@ -392,7 +368,12 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
       <div class="cb-bdy">
         <div class="fr">
           <div class="fl">valsts <span class="r">*</span></div>
-          <div class="fv"><input type="text" class="m"></div>
+          <div class="fv">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <input type="text" class="m" style="flex:1;">
+              <button type="button" onclick="pieprasitOTIS(this)" style="padding:7px 14px;border-radius:20px;border:1.5px solid #8b1a2e;background:#fff;color:#8b1a2e;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;">Pieprasīt datus OTIS</button>
+            </div>
+          </div>
         </div>
         <div class="fr">
           <div class="fl">mācību iestāde <span class="r">*</span></div>
@@ -471,6 +452,35 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
     <hr class="dv">
 
+    <div class="sec-h">Kontaktinformācija</div>
+
+    <div class="fr">
+      <div class="fl">Tālrunis <span class="r">*</span></div>
+      <div class="fv"><input type="tel" class="m"></div>
+    </div>
+
+    <div class="fr">
+      <div class="fl">E-pasta adrese</div>
+      <div class="fv"><input type="email" class="m"></div>
+    </div>
+
+    <div class="fr">
+      <div class="fl">PMLP reģistrētā ārzemju adrese</div>
+      <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
+    </div>
+
+    <div class="fr">
+      <div class="fl">VSAA IS reģistrētā ārzemju adrese</div>
+      <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
+    </div>
+
+    <div class="fr">
+      <div class="fl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</div>
+      <div class="fv"><input type="text" class="m"></div>
+    </div>
+
+    <hr class="dv">
+
     <div class="sec-h">Iesniegumam pievienoju šādus dokumentus</div>
     <div class="docs-note">* Jāpievieno informācijas izmaiņas apliecinoši dokumenti, ja tādi ir</div>
 
@@ -517,6 +527,18 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 </div>
 
 <script>
+function pieprasitOTIS(btn) {
+  const inp = btn.previousElementSibling;
+  // Simulate OTIS data fetch
+  btn.textContent = 'Ielādē...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Pieprasīt datus OTIS';
+    btn.disabled = false;
+    alert('Dati no OTIS sistēmas pieprasīti.');
+  }, 800);
+}
+
 function tog(id, trig) {
   const blk = document.getElementById(id);
   const cb = trig.querySelector('input[type=checkbox]');
@@ -545,11 +567,11 @@ function addB() {
       <div class="fv"><input type="text" class="m"></div></div>
     <div class="fr"><div class="fl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
       <div class="fv">
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div><div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Valsts *</div><input type="text" class="m"></div>
-          <div><div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Iela, mājas Nr. *</div><input type="text"></div>
-          <div><div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Pilsēta/pagasts, novads *</div><input type="text"></div>
-          <div><div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Pasta indekss</div><input type="text" class="n"></div>
+        <div class="addr-fields">
+          <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><input type="text" class="addr-inp m"></div>
+          <div class="addr-row"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp"></div>
+          <div class="addr-row"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp"></div>
+          <div class="addr-row"><label class="addr-lbl">Pasta indekss</label><input type="text" class="addr-inp n"></div>
         </div>
       </div></div>`;
   lst.appendChild(d);
