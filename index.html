@@ -207,28 +207,11 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
   <div class="fbody">
 
-    <div class="sec-h" style="margin-top:20px;">PAZIŅOJUMS</div>
-    <div class="sec-sub">PAR IZMAIŅĀM privātās vai darba dzīves apstākļos</div>
-    <div class="sec-sub-i">(personām, kuras dzīvo ārvalstī un saņem<br>Valsts sociālās apdrošināšanas aģentūras pakalpojumus)</div>
-
-    <div class="fr">
-      <div class="fl" style="font-weight:600;">Valsts sociālās apdrošināšanas aģentūrai</div>
-      <div class="fv" style="padding-top:9px;font-size:13.5px;color:#555;"></div>
-    </div>
+    <div style="margin-top:20px;margin-bottom:20px;font-size:15px;font-weight:700;color:#111;line-height:1.5;">PAR IZMAIŅĀM privātās vai darba dzīves apstākļos<br>(personām, kuras dzīvo ārvalstī un saņem Valsts sociālās apdrošināšanas aģentūras pakalpojumus)</div>
 
     <hr class="dv">
 
     <div class="sec-h">Iesniedzēja dati</div>
-
-    <div class="fr">
-      <div class="fl">20&nbsp;&nbsp;.gada&nbsp;&nbsp;. <span class="r">*</span></div>
-      <div class="fv">
-        <div class="dr">
-          <input type="text" placeholder="dd.mm.gggg." class="n">
-          <span class="cal">📅</span>
-        </div>
-      </div>
-    </div>
 
     <div class="fr">
       <div class="fl">Vārds, Uzvārds <span class="r">*</span></div>
@@ -257,11 +240,13 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
     </div>
 
     <div class="fr">
-      <div class="fl">Dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
-      <div class="fv">
-        <input type="text">
-        <div class="hint">(norādīt pilnu adresi)</div>
-      </div>
+      <div class="fl">PMLP reģistrētā ārzemju adrese</div>
+      <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
+    </div>
+
+    <div class="fr">
+      <div class="fl">VSAA IS reģistrētā ārzemju adrese</div>
+      <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
     </div>
 
     <div class="fr">
@@ -283,8 +268,24 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
         <div class="fr">
           <div class="fl">Jaunā dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
           <div class="fv">
-            <input type="text">
-            <div class="hint">(norādīt pilnu adresi)</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div>
+                <div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Valsts <span class="r">*</span></div>
+                <input type="text" class="m">
+              </div>
+              <div>
+                <div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Iela, mājas Nr. <span class="r">*</span></div>
+                <input type="text">
+              </div>
+              <div>
+                <div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Pilsēta/pagasts, novads <span class="r">*</span></div>
+                <input type="text">
+              </div>
+              <div>
+                <div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Pasta indekss</div>
+                <input type="text" class="n">
+              </div>
+            </div>
           </div>
         </div>
         <div class="fr">
@@ -543,7 +544,14 @@ function addB() {
     <div class="fr"><div class="fl">bērna vārds/uzvārds <span class="r">*</span></div>
       <div class="fv"><input type="text" class="m"></div></div>
     <div class="fr"><div class="fl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
-      <div class="fv"><input type="text"><div class="hint">(norādīt pilnu adresi)</div></div></div>`;
+      <div class="fv">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div><div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Valsts *</div><input type="text" class="m"></div>
+          <div><div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Iela, mājas Nr. *</div><input type="text"></div>
+          <div><div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Pilsēta/pagasts, novads *</div><input type="text"></div>
+          <div><div class="hint" style="margin-bottom:3px;font-style:normal;color:#555;font-weight:600;">Pasta indekss</div><input type="text" class="n"></div>
+        </div>
+      </div></div>`;
   lst.appendChild(d);
   renum();
 }
