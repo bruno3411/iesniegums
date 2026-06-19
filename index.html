@@ -154,6 +154,15 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 .addr-inp.m { max-width: 340px; }
 .addr-inp.n { max-width: 180px; }
 
+/* ADDRESS MODE BUTTONS */
+.addr-mode-btns { display: flex; gap: 10px; margin: 4px 0 12px; flex-wrap: wrap; }
+.btn-addr-manual, .btn-addr-otis { padding: 7px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.12s; }
+.btn-addr-manual { border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; }
+.btn-addr-manual:hover { background: #fdf5f6; }
+.btn-addr-otis { border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; }
+.btn-addr-otis:hover { background: #fdf5f6; }
+.btn-addr-manual.selected, .btn-addr-otis.selected { background: #8b1a2e; color: #fff; }
+
 /* ERROR LINE */
 .erl { display: flex; align-items: flex-start; gap: 8px; margin-top: 24px; font-size: 13px; color: #555; }
 .eico { color: #f0a800; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
@@ -247,20 +256,24 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
         <div class="fr">
           <div class="fl">Jaunā dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
           <div class="fv">
-            <div class="addr-fields">
+            <div class="addr-fields" id="addr1">
               <div class="addr-row">
                 <label class="addr-lbl">Valsts <span class="r">*</span></label>
                 <input type="text" class="addr-inp m">
               </div>
-              <div class="addr-row">
+              <div class="addr-mode-btns" id="addr1-btns">
+                <button type="button" class="btn-addr-manual" onclick="showManual('addr1')">Reģistrēt manuāli</button>
+                <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
+              </div>
+              <div class="addr-row addr-extra" id="addr1-extra" style="display:none;">
                 <label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label>
                 <input type="text" class="addr-inp">
               </div>
-              <div class="addr-row">
+              <div class="addr-row addr-extra" id="addr1-extra2" style="display:none;">
                 <label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label>
                 <input type="text" class="addr-inp">
               </div>
-              <div class="addr-row">
+              <div class="addr-row addr-extra" id="addr1-extra3" style="display:none;">
                 <label class="addr-lbl">Pasta indekss</label>
                 <input type="text" class="addr-inp n">
               </div>
@@ -538,15 +551,30 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
 <script>
 function pieprasitOTIS(btn) {
-  const inp = btn.previousElementSibling;
   // Simulate OTIS data fetch
+  const orig = btn.textContent;
   btn.textContent = 'Ielādē...';
   btn.disabled = true;
   setTimeout(() => {
-    btn.textContent = 'Pieprasīt datus OTIS';
+    btn.textContent = orig;
     btn.disabled = false;
-    alert('Dati no OTIS sistēmas pieprasīti.');
+    btn.classList.add('selected');
+    alert('Dati no OTIS sistēmas saņemti.');
   }, 800);
+}
+
+function showManual(prefix) {
+  const extra1 = document.getElementById(prefix + '-extra');
+  const extra2 = document.getElementById(prefix + '-extra2');
+  const extra3 = document.getElementById(prefix + '-extra3');
+  const btns = document.getElementById(prefix + '-btns');
+  if (extra1) extra1.style.display = 'flex';
+  if (extra2) extra2.style.display = 'flex';
+  if (extra3) extra3.style.display = 'flex';
+  if (btns) {
+    const manualBtn = btns.querySelector('.btn-addr-manual');
+    if (manualBtn) manualBtn.classList.add('selected');
+  }
 }
 
 function tog(id, trig) {
@@ -577,11 +605,15 @@ function addB() {
       <div class="fv"><input type="text" class="m"></div></div>
     <div class="fr"><div class="fl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
       <div class="fv">
-        <div class="addr-fields">
+        <div class="addr-fields" id="addrB${bc}">
           <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><input type="text" class="addr-inp m"></div>
-          <div class="addr-row"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp"></div>
-          <div class="addr-row"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp"></div>
-          <div class="addr-row"><label class="addr-lbl">Pasta indekss</label><input type="text" class="addr-inp n"></div>
+          <div class="addr-mode-btns" id="addrB${bc}-btns">
+            <button type="button" class="btn-addr-manual" onclick="showManual('addrB${bc}')">Reģistrēt manuāli</button>
+            <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
+          </div>
+          <div class="addr-row addr-extra" id="addrB${bc}-extra" style="display:none;"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp"></div>
+          <div class="addr-row addr-extra" id="addrB${bc}-extra2" style="display:none;"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp"></div>
+          <div class="addr-row addr-extra" id="addrB${bc}-extra3" style="display:none;"><label class="addr-lbl">Pasta indekss</label><input type="text" class="addr-inp n"></div>
         </div>
       </div></div>`;
   lst.appendChild(d);
