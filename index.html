@@ -130,6 +130,19 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 .btn-fw { padding: 10px 28px; border-radius: 22px; font-size: 14px; border: 2px solid #8b1a2e; background: #8b1a2e; color: #fff; cursor: pointer; font-family: inherit; font-weight: 600; }
 .btn-fw:hover { background: #6d1524; border-color: #6d1524; }
 
+/* RADIO GROUP */
+.radio-grp { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
+.radio-opt { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: #222; cursor: pointer; }
+.radio-opt input[type=radio] { width: 17px; height: 17px; accent-color: #8b1a2e; cursor: pointer; flex-shrink: 0; }
+
+/* INFO NOTE */
+.info-note { font-size: 13px; color: #333; margin-bottom: 16px; line-height: 1.6; }
+
+/* CHECK OPT (confirmations) */
+.check-opt { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; font-size: 13.5px; color: #222; line-height: 1.6; }
+.check-opt input[type=checkbox] { width: 17px; height: 17px; margin-top: 2px; accent-color: #8b1a2e; cursor: pointer; flex-shrink: 0; }
+.check-opt label { cursor: pointer; }
+
 /* ADDRESS SUB-FIELDS */
 .addr-fields { display: flex; flex-direction: column; gap: 0; }
 .addr-row { display: flex; flex-direction: column; margin-bottom: 12px; }
@@ -452,35 +465,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
     <hr class="dv">
 
-    <div class="sec-h">Kontaktinformācija</div>
-
-    <div class="fr">
-      <div class="fl">Tālrunis <span class="r">*</span></div>
-      <div class="fv"><input type="tel" class="m"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">E-pasta adrese</div>
-      <div class="fv"><input type="email" class="m"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">PMLP reģistrētā ārzemju adrese</div>
-      <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">VSAA IS reģistrētā ārzemju adrese</div>
-      <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
-    </div>
-
-    <div class="fr">
-      <div class="fl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</div>
-      <div class="fv"><input type="text" class="m"></div>
-    </div>
-
-    <hr class="dv">
-
     <div class="sec-h">Iesniegumam pievienoju šādus dokumentus</div>
     <div class="docs-note">* Jāpievieno informācijas izmaiņas apliecinoši dokumenti, ja tādi ir</div>
 
@@ -502,11 +486,37 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
     <hr class="dv">
 
-    <div class="priv-row">
-      <input type="checkbox" id="cbp">
-      <label for="cbp">
-        Apliecinu, ka esmu iepazinies/-usies ar VSAA privātuma politiku, kas pieejama interneta vietnes <a href="https://www.vsaa.gov.lv" target="_blank">www.vsaa.gov.lv</a> sadaļā "Privātuma politika".
-      </label>
+    <div class="sec-h">Kontaktinformācija<span class="r">*</span></div>
+
+    <div class="fr">
+      <div class="fl">Mobilais tālrunis: (+371) <span class="ti">?</span></div>
+      <div class="fv"><input type="tel" class="m"></div>
+    </div>
+
+    <div class="fr">
+      <div class="fl">E-pasta adrese: <span class="ti">?</span></div>
+      <div class="fv"><input type="email" class="m"></div>
+    </div>
+
+    <hr class="dv">
+
+    <div class="sec-h" style="margin-bottom:14px;">Informāciju par iesnieguma saņemšanu VSAA un lēmuma pieņemšanu vēlos saņemt:<span class="r">*</span> <span class="ti">?</span></div>
+
+    <div class="radio-grp">
+      <label class="radio-opt"><input type="radio" name="infoVeids" value="epasts"> E-pastā</label>
+      <label class="radio-opt"><input type="radio" name="infoVeids" value="sms"> ar SMS (īsziņu)</label>
+    </div>
+
+    <div class="info-note">Ar informāciju par iesnieguma apstrādes gaitu un pieņemto lēmumu varat iepazīties portālā Latvija.gov.lv, izmantojot e-pakalpojumu "VSAA informācija un pakalpojumi".</div>
+
+    <div class="check-opt">
+      <input type="checkbox" id="cb-vecaki">
+      <label for="cb-vecaki">Apliecinu, ka bērna vecāki nedzīvo/nedzīvoja vai nestrādā/nestrādāja citā Eiropas Savienības/Eiropas Ekonomikas Zonas (ES/EEZ) dalībvalstī. <span class="r">*</span></label>
+    </div>
+
+    <div class="check-opt">
+      <input type="checkbox" id="cb-patiesa">
+      <label for="cb-patiesa">Apliecinu, ka ar pakalpojuma aprakstu esmu iepazinies/-usies un iesniegumā norādītā informācija ir patiesa. <span class="r">*</span></label>
     </div>
 
     <div class="btns">
@@ -595,8 +605,8 @@ function rmDoc(btn) {
   else btn.previousElementSibling.value='';
 }
 function sub() {
-  if(!document.getElementById('cbp').checked){
-    alert('Lūdzu aplieciniet, ka esat iepazinies ar VSAA privātuma politiku.');
+  if(!document.getElementById('cb-vecaki').checked || !document.getElementById('cb-patiesa').checked){
+    alert('Lūdzu apstipriniet visus nepieciešamos apliecinājumus.');
     return;
   }
   alert('Iesniegums iesniegts. Pārejam uz 3. soli.');
