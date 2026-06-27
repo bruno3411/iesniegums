@@ -154,6 +154,25 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 .addr-inp.m { max-width: 340px; }
 .addr-inp.n { max-width: 180px; }
 
+/* BĒRNS CARD — summary table */
+.berns-card { border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; background: #fff; overflow: hidden; }
+.berns-summary { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 0; background: #fff; }
+.berns-sum-head { font-size: 12px; font-weight: 700; color: #333; padding: 8px 10px 4px; border-bottom: 1px solid #eee; }
+.berns-sum-val { font-size: 12.5px; color: #222; padding: 6px 10px 8px; border-bottom: 1px solid #eee; }
+.berns-sum-del { display: flex; align-items: center; justify-content: center; padding: 6px 10px; border-bottom: 1px solid #eee; }
+.btn-dzest { padding: 6px 18px; border-radius: 20px; border: 1.5px solid #c8a84b; background: #fff; color: #8b7020; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.btn-dzest:hover { background: #fdf9ec; }
+.berns-fields { padding: 14px 16px 6px; }
+.berns-frow { display: flex; align-items: flex-start; margin-bottom: 14px; gap: 0; }
+.berns-flbl { width: 200px; min-width: 160px; flex-shrink: 0; font-size: 13.5px; color: #222; padding-top: 9px; font-weight: 500; padding-right: 12px; display: flex; align-items: flex-start; gap: 4px; }
+.berns-flbl .r { color: #8b1a2e; font-weight: 700; }
+.berns-flbl .ti { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%; border: 1.5px solid #999; color: #777; font-size: 11px; font-weight: 700; cursor: pointer; margin-left: 1px; flex-shrink: 0; }
+.berns-fval { flex: 1; }
+.berns-fval input { width: 100%; max-width: 340px; border: 1px solid #ccc; border-radius: 3px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.15s; }
+.berns-fval input:focus { border-color: #8b1a2e; }
+.btn-saglabat { margin: 4px 0 14px 0; padding: 8px 22px; border-radius: 20px; border: 1.5px solid #c8a84b; background: #fff; color: #8b7020; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; }
+.btn-saglabat:hover { background: #fdf9ec; }
+
 /* ADDRESS MODE BUTTONS */
 .addr-mode-btns { display: flex; gap: 10px; margin: 4px 0 12px; flex-wrap: wrap; }
 .btn-addr-manual, .btn-addr-otis { padding: 7px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.12s; }
@@ -596,35 +615,60 @@ function initB() {
 let bc = 0;
 function addB() {
   bc++;
+  const id = bc;
   const lst = document.getElementById('blist');
   const d = document.createElement('div');
-  d.className = 'ch-card'; d.id = 'bc' + bc;
-  d.innerHTML = `<div class="ch-ttl">Bērns ${bc}</div>
-    <button class="btn-rm" onclick="rmB(${bc})">✕</button>
-    <div class="fr"><div class="fl">bērna vārds/uzvārds <span class="r">*</span></div>
-      <div class="fv"><input type="text" class="m"></div></div>
-    <div class="fr"><div class="fl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
-      <div class="fv">
-        <div class="addr-fields" id="addrB${bc}">
-          <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><input type="text" class="addr-inp m"></div>
-          <div class="addr-mode-btns" id="addrB${bc}-btns">
-            <button type="button" class="btn-addr-manual" onclick="showManual('addrB${bc}')">Reģistrēt manuāli</button>
-            <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
-          </div>
-          <div class="addr-row addr-extra" id="addrB${bc}-extra" style="display:none;"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp"></div>
-          <div class="addr-row addr-extra" id="addrB${bc}-extra2" style="display:none;"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp"></div>
-          <div class="addr-row addr-extra" id="addrB${bc}-extra3" style="display:none;"><label class="addr-lbl">Pasta indekss</label><input type="text" class="addr-inp n"></div>
-        </div>
-      </div></div>`;
+  d.className = 'berns-card'; d.id = 'bc' + id;
+  d.innerHTML = `
+    <div class="berns-summary">
+      <div class="berns-sum-head">Bērna personas<br>kods</div>
+      <div class="berns-sum-head">Bērna vārds</div>
+      <div class="berns-sum-head">Bērna uzvārds</div>
+      <div class="berns-sum-head">Dzimšanas laiks</div>
+      <div class="berns-sum-head"></div>
+      <div class="berns-sum-val" id="bc${id}-sum-pk">–</div>
+      <div class="berns-sum-val" id="bc${id}-sum-vards">–</div>
+      <div class="berns-sum-val" id="bc${id}-sum-uzvards">–</div>
+      <div class="berns-sum-val" id="bc${id}-sum-dzim">–</div>
+      <div class="berns-sum-del"><button class="btn-dzest" onclick="rmB(${id})">Dzēst</button></div>
+    </div>
+    <div class="berns-fields">
+      <div class="berns-frow">
+        <div class="berns-flbl">Bērna personas kods:<span class="r">*</span> <span class="ti">?</span></div>
+        <div class="berns-fval"><input type="text" id="bc${id}-pk" oninput="updateSum(${id})" placeholder="______-_____"></div>
+      </div>
+      <div class="berns-frow">
+        <div class="berns-flbl">Bērna vārds:<span class="r">*</span> <span class="ti">?</span></div>
+        <div class="berns-fval"><input type="text" id="bc${id}-vards" oninput="updateSum(${id})"></div>
+      </div>
+      <div class="berns-frow">
+        <div class="berns-flbl">Bērna uzvārds:<span class="r">*</span> <span class="ti">?</span></div>
+        <div class="berns-fval"><input type="text" id="bc${id}-uzvards" oninput="updateSum(${id})"></div>
+      </div>
+      <div class="berns-frow">
+        <div class="berns-flbl">Dzimšanas laiks: <span class="ti">?</span></div>
+        <div class="berns-fval"><input type="text" id="bc${id}-dzim" oninput="updateSum(${id})" placeholder="dd.mm.gggg."></div>
+      </div>
+      <button class="btn-saglabat" onclick="saglabatBerns(${id})">Saglabāt</button>
+    </div>`;
   lst.appendChild(d);
-  renum();
 }
-function rmB(id) { const e = document.getElementById('bc'+id); if(e) e.remove(); renum(); }
-function renum() {
-  document.querySelectorAll('#blist .ch-card').forEach((e,i)=>{
-    const t=e.querySelector('.ch-ttl'); if(t) t.textContent='Bērns '+(i+1);
-  });
+
+function updateSum(id) {
+  const pk = document.getElementById('bc'+id+'-pk');
+  const vards = document.getElementById('bc'+id+'-vards');
+  const uzvards = document.getElementById('bc'+id+'-uzvards');
+  const dzim = document.getElementById('bc'+id+'-dzim');
+  if(pk) document.getElementById('bc'+id+'-sum-pk').textContent = pk.value || '–';
+  if(vards) document.getElementById('bc'+id+'-sum-vards').textContent = vards.value || '–';
+  if(uzvards) document.getElementById('bc'+id+'-sum-uzvards').textContent = uzvards.value || '–';
+  if(dzim) document.getElementById('bc'+id+'-sum-dzim').textContent = dzim.value || '–';
 }
+
+function saglabatBerns(id) {
+  updateSum(id);
+}
+function rmB(id) { const e = document.getElementById('bc'+id); if(e) e.remove(); }
 function addDoc() {
   const lst = document.getElementById('dlist');
   const d = document.createElement('div'); d.className='doc-row';
