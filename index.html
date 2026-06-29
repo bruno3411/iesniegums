@@ -173,6 +173,9 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 .btn-saglabat { margin: 4px 0 14px 0; padding: 8px 22px; border-radius: 20px; border: 1.5px solid #c8a84b; background: #fff; color: #8b7020; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; }
 .btn-saglabat:hover { background: #fdf9ec; }
 
+.otis-result { font-size: 13.5px; color: #222; padding: 8px 0 4px; }
+.otis-result strong { color: #8b1a2e; }
+
 /* ADDRESS MODE BUTTONS */
 .addr-mode-btns { display: flex; gap: 10px; margin: 4px 0 12px; flex-wrap: wrap; }
 .btn-addr-manual, .btn-addr-otis { padding: 7px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.12s; }
@@ -570,15 +573,33 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
 <script>
 function pieprasitOTIS(btn) {
-  // Simulate OTIS data fetch
-  const orig = btn.textContent;
   btn.textContent = 'Ielādē...';
   btn.disabled = true;
   setTimeout(() => {
-    btn.textContent = orig;
+    btn.textContent = 'Saņemt datus no OTIS';
     btn.disabled = false;
     btn.classList.add('selected');
-    alert('Dati no OTIS sistēmas saņemti.');
+    const btnsDiv = btn.parentElement;
+    const addrFields = btnsDiv.parentElement;
+    const prefix = addrFields.id;
+    // Hide extra address rows
+    ['extra','extra2','extra3'].forEach(s => {
+      const el = document.getElementById(prefix + '-' + s);
+      if (el) el.style.display = 'none';
+    });
+    // Remove any existing result
+    const existing = addrFields.querySelector('.otis-result');
+    if (existing) existing.remove();
+    // Show document result
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2,'0');
+    const mm = String(now.getMonth()+1).padStart(2,'0');
+    const yyyy = now.getFullYear();
+    const fname = 'otis_' + yyyy + mm + dd + '.pdf';
+    const result = document.createElement('div');
+    result.className = 'otis-result';
+    result.innerHTML = 'Saņemtais dokuments no OTIS: <strong>' + fname + '</strong>';
+    addrFields.appendChild(result);
   }, 800);
 }
 
@@ -648,6 +669,21 @@ function addB() {
       <div class="berns-frow">
         <div class="berns-flbl">Dzimšanas laiks: <span class="ti">?</span></div>
         <div class="berns-fval"><input type="text" id="bc${id}-dzim" oninput="updateSum(${id})" placeholder="dd.mm.gggg."></div>
+      </div>
+      <div class="berns-frow">
+        <div class="berns-flbl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
+        <div class="berns-fval" style="max-width:100%;">
+          <div class="addr-fields" id="addrB${id}">
+            <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><input type="text" class="addr-inp m"></div>
+            <div class="addr-mode-btns" id="addrB${id}-btns">
+              <button type="button" class="btn-addr-manual" onclick="showManual('addrB${id}')">Reģistrēt manuāli</button>
+              <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
+            </div>
+            <div class="addr-row addr-extra" id="addrB${id}-extra" style="display:none;"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp"></div>
+            <div class="addr-row addr-extra" id="addrB${id}-extra2" style="display:none;"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp"></div>
+            <div class="addr-row addr-extra" id="addrB${id}-extra3" style="display:none;"><label class="addr-lbl">Pasta indekss</label><input type="text" class="addr-inp n"></div>
+          </div>
+        </div>
       </div>
       <button class="btn-saglabat" onclick="saglabatBerns(${id})">Saglabāt</button>
     </div>`;
