@@ -173,17 +173,17 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 .btn-saglabat { margin: 4px 0 14px 0; padding: 8px 22px; border-radius: 20px; border: 1.5px solid #c8a84b; background: #fff; color: #8b7020; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; }
 .btn-saglabat:hover { background: #fdf9ec; }
 
-.otis-result { font-size: 13.5px; color: #222; padding: 8px 0 4px; }
-.otis-result strong { color: #8b1a2e; }
+.ootis-result { font-size: 13.5px; color: #222; padding: 8px 0 4px; }
+.ootis-result strong { color: #8b1a2e; }
 
 /* ADDRESS MODE BUTTONS */
 .addr-mode-btns { display: flex; gap: 10px; margin: 4px 0 12px; flex-wrap: wrap; }
-.btn-addr-manual, .btn-addr-otis { padding: 7px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.12s; }
+.btn-addr-manual, .btn-addr-ootis { padding: 7px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.12s; }
 .btn-addr-manual { border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; }
 .btn-addr-manual:hover { background: #fdf5f6; }
-.btn-addr-otis { border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; }
-.btn-addr-otis:hover { background: #fdf5f6; }
-.btn-addr-manual.selected, .btn-addr-otis.selected { background: #8b1a2e; color: #fff; }
+.btn-addr-ootis { border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; }
+.btn-addr-ootis:hover { background: #fdf5f6; }
+.btn-addr-manual.selected, .btn-addr-ootis.selected { background: #8b1a2e; color: #fff; }
 
 /* ERROR LINE */
 .erl { display: flex; align-items: flex-start; gap: 8px; margin-top: 24px; font-size: 13px; color: #555; }
@@ -293,7 +293,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
               </div>
               <div class="addr-mode-btns" id="addr1-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr1')">Reģistrēt manuāli</button>
-                <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
+                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
               </div>
               <div class="addr-row addr-extra" id="addr1-extra" style="display:none;">
                 <label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label>
@@ -353,7 +353,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
               </div>
               <div class="addr-mode-btns" id="addr3-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr3')">Reģistrēt manuāli</button>
-                <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
+                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
               </div>
             </div>
           </div>
@@ -406,7 +406,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
               </div>
               <div class="addr-mode-btns" id="addr4-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr4')">Reģistrēt manuāli</button>
-                <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
+                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
               </div>
             </div>
           </div>
@@ -448,7 +448,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
               </div>
               <div class="addr-mode-btns" id="addr5-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr5')">Reģistrēt manuāli</button>
-                <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
+                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
               </div>
             </div>
           </div>
@@ -602,11 +602,11 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 </div>
 
 <script>
-function pieprasitOTIS(btn) {
+function pieprasitOOTIS(btn) {
   btn.textContent = 'Ielādē...';
   btn.disabled = true;
   setTimeout(() => {
-    btn.textContent = 'Saņemt datus no OTIS';
+    btn.textContent = 'Saņemt datus no OOTIS';
     btn.disabled = false;
     btn.classList.add('selected');
     const btnsDiv = btn.parentElement;
@@ -618,17 +618,17 @@ function pieprasitOTIS(btn) {
       if (el) el.style.display = 'none';
     });
     // Remove any existing result
-    const existing = addrFields.querySelector('.otis-result');
+    const existing = addrFields.querySelector('.ootis-result');
     if (existing) existing.remove();
     // Show document result
     const now = new Date();
     const dd = String(now.getDate()).padStart(2,'0');
     const mm = String(now.getMonth()+1).padStart(2,'0');
     const yyyy = now.getFullYear();
-    const fname = 'otis_' + yyyy + mm + dd + '.pdf';
+    const fname = 'ootis_' + yyyy + mm + dd + '.pdf';
     const result = document.createElement('div');
-    result.className = 'otis-result';
-    result.innerHTML = 'Saņemtais dokuments no OTIS: <strong>' + fname + '</strong>';
+    result.className = 'ootis-result';
+    result.innerHTML = 'Saņemtais dokuments no OOTIS: <strong>' + fname + '</strong>';
     addrFields.appendChild(result);
   }, 800);
 }
@@ -709,7 +709,7 @@ function addB() {
             <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><input type="text" class="addr-inp m"></div>
             <div class="addr-mode-btns" id="addrB${id}-btns">
               <button type="button" class="btn-addr-manual" onclick="showManual('addrB${id}')">Reģistrēt manuāli</button>
-              <button type="button" class="btn-addr-otis" onclick="pieprasitOTIS(this)">Saņemt datus no OTIS</button>
+              <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
             </div>
             <div class="addr-row addr-extra" id="addrB${id}-extra" style="display:none;"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp"></div>
             <div class="addr-row addr-extra" id="addrB${id}-extra2" style="display:none;"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp"></div>
