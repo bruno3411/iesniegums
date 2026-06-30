@@ -276,20 +276,49 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
       </div>
       <div class="cb-bdy">
         <div class="fr">
+          <div class="fl" style="font-weight:400;">PMLP reģistrētā dzīvesvietas adrese <span class="ti">?</span></div>
+          <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
+        </div>
+
+        <div class="fr">
+          <div class="fl" style="font-weight:400;">VSAA reģistrētā dzīvesvietas adrese <span class="ti">?</span></div>
+          <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
+        </div>
+
+        <div class="fr">
           <div class="fl">Jaunā dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
           <div class="fv">
             <div class="addr-fields" id="addr1">
               <div class="addr-row">
-                <label class="addr-lbl">PMLP reģistrētā dzīvesvietas adrese <span class="ti">?</span></label>
-                <input type="text" class="addr-inp m" readonly style="background:#f9f9f9;color:#555;">
-              </div>
-              <div class="addr-row">
-                <label class="addr-lbl">VSAA reģistrētā dzīvesvietas adrese <span class="ti">?</span></label>
-                <input type="text" class="addr-inp m" readonly style="background:#f9f9f9;color:#555;">
-              </div>
-              <div class="addr-row">
                 <label class="addr-lbl">Valsts <span class="r">*</span></label>
-                <input type="text" class="addr-inp m">
+                <select class="addr-inp m">
+<option value="" disabled selected>Izvēlieties valsti</option>
+                  <option value="Austrija">Austrija</option>
+                  <option value="Beļģija">Beļģija</option>
+                  <option value="Bulgārija">Bulgārija</option>
+                  <option value="Čehija">Čehija</option>
+                  <option value="Dānija">Dānija</option>
+                  <option value="Igaunija">Igaunija</option>
+                  <option value="Somija">Somija</option>
+                  <option value="Francija">Francija</option>
+                  <option value="Vācija">Vācija</option>
+                  <option value="Grieķija">Grieķija</option>
+                  <option value="Ungārija">Ungārija</option>
+                  <option value="Īrija">Īrija</option>
+                  <option value="Itālija">Itālija</option>
+                  <option value="Kipra">Kipra</option>
+                  <option value="Lietuva">Lietuva</option>
+                  <option value="Luksemburga">Luksemburga</option>
+                  <option value="Malta">Malta</option>
+                  <option value="Nīderlande">Nīderlande</option>
+                  <option value="Polija">Polija</option>
+                  <option value="Portugāle">Portugāle</option>
+                  <option value="Rumānija">Rumānija</option>
+                  <option value="Slovākija">Slovākija</option>
+                  <option value="Slovēnija">Slovēnija</option>
+                  <option value="Spānija">Spānija</option>
+                  <option value="Zviedrija">Zviedrija</option>
+                </select>
               </div>
               <div class="addr-mode-btns" id="addr1-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr1')">Reģistrēt manuāli</button>
@@ -349,7 +378,34 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
           <div class="fv">
             <div class="addr-fields" id="addr3">
               <div class="addr-row">
-                <input type="text" class="addr-inp m">
+                <select class="addr-inp m">
+<option value="" disabled selected>Izvēlieties valsti</option>
+                  <option value="Austrija">Austrija</option>
+                  <option value="Beļģija">Beļģija</option>
+                  <option value="Bulgārija">Bulgārija</option>
+                  <option value="Čehija">Čehija</option>
+                  <option value="Dānija">Dānija</option>
+                  <option value="Igaunija">Igaunija</option>
+                  <option value="Somija">Somija</option>
+                  <option value="Francija">Francija</option>
+                  <option value="Vācija">Vācija</option>
+                  <option value="Grieķija">Grieķija</option>
+                  <option value="Ungārija">Ungārija</option>
+                  <option value="Īrija">Īrija</option>
+                  <option value="Itālija">Itālija</option>
+                  <option value="Kipra">Kipra</option>
+                  <option value="Lietuva">Lietuva</option>
+                  <option value="Luksemburga">Luksemburga</option>
+                  <option value="Malta">Malta</option>
+                  <option value="Nīderlande">Nīderlande</option>
+                  <option value="Polija">Polija</option>
+                  <option value="Portugāle">Portugāle</option>
+                  <option value="Rumānija">Rumānija</option>
+                  <option value="Slovākija">Slovākija</option>
+                  <option value="Slovēnija">Slovēnija</option>
+                  <option value="Spānija">Spānija</option>
+                  <option value="Zviedrija">Zviedrija</option>
+                </select>
               </div>
               <div class="addr-mode-btns" id="addr3-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr3')">Reģistrēt manuāli</button>
@@ -402,7 +458,34 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
           <div class="fv">
             <div class="addr-fields" id="addr4">
               <div class="addr-row">
-                <input type="text" class="addr-inp m">
+                <select class="addr-inp m">
+<option value="" disabled selected>Izvēlieties valsti</option>
+                  <option value="Austrija">Austrija</option>
+                  <option value="Beļģija">Beļģija</option>
+                  <option value="Bulgārija">Bulgārija</option>
+                  <option value="Čehija">Čehija</option>
+                  <option value="Dānija">Dānija</option>
+                  <option value="Igaunija">Igaunija</option>
+                  <option value="Somija">Somija</option>
+                  <option value="Francija">Francija</option>
+                  <option value="Vācija">Vācija</option>
+                  <option value="Grieķija">Grieķija</option>
+                  <option value="Ungārija">Ungārija</option>
+                  <option value="Īrija">Īrija</option>
+                  <option value="Itālija">Itālija</option>
+                  <option value="Kipra">Kipra</option>
+                  <option value="Lietuva">Lietuva</option>
+                  <option value="Luksemburga">Luksemburga</option>
+                  <option value="Malta">Malta</option>
+                  <option value="Nīderlande">Nīderlande</option>
+                  <option value="Polija">Polija</option>
+                  <option value="Portugāle">Portugāle</option>
+                  <option value="Rumānija">Rumānija</option>
+                  <option value="Slovākija">Slovākija</option>
+                  <option value="Slovēnija">Slovēnija</option>
+                  <option value="Spānija">Spānija</option>
+                  <option value="Zviedrija">Zviedrija</option>
+                </select>
               </div>
               <div class="addr-mode-btns" id="addr4-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr4')">Reģistrēt manuāli</button>
@@ -444,7 +527,34 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
           <div class="fv">
             <div class="addr-fields" id="addr5">
               <div class="addr-row">
-                <input type="text" class="addr-inp m">
+                <select class="addr-inp m">
+<option value="" disabled selected>Izvēlieties valsti</option>
+                  <option value="Austrija">Austrija</option>
+                  <option value="Beļģija">Beļģija</option>
+                  <option value="Bulgārija">Bulgārija</option>
+                  <option value="Čehija">Čehija</option>
+                  <option value="Dānija">Dānija</option>
+                  <option value="Igaunija">Igaunija</option>
+                  <option value="Somija">Somija</option>
+                  <option value="Francija">Francija</option>
+                  <option value="Vācija">Vācija</option>
+                  <option value="Grieķija">Grieķija</option>
+                  <option value="Ungārija">Ungārija</option>
+                  <option value="Īrija">Īrija</option>
+                  <option value="Itālija">Itālija</option>
+                  <option value="Kipra">Kipra</option>
+                  <option value="Lietuva">Lietuva</option>
+                  <option value="Luksemburga">Luksemburga</option>
+                  <option value="Malta">Malta</option>
+                  <option value="Nīderlande">Nīderlande</option>
+                  <option value="Polija">Polija</option>
+                  <option value="Portugāle">Portugāle</option>
+                  <option value="Rumānija">Rumānija</option>
+                  <option value="Slovākija">Slovākija</option>
+                  <option value="Slovēnija">Slovēnija</option>
+                  <option value="Spānija">Spānija</option>
+                  <option value="Zviedrija">Zviedrija</option>
+                </select>
               </div>
               <div class="addr-mode-btns" id="addr5-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr5')">Reģistrēt manuāli</button>
@@ -602,6 +712,13 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 </div>
 
 <script>
+const EU_VALSTIS = ["Austrija","Beļģija","Bulgārija","Čehija","Dānija","Igaunija","Somija","Francija","Vācija","Grieķija","Ungārija","Īrija","Itālija","Kipra","Lietuva","Luksemburga","Malta","Nīderlande","Polija","Portugāle","Rumānija","Slovākija","Slovēnija","Spānija","Zviedrija"];
+function euOptionsHtml() {
+  let opts = '<option value="" disabled selected>Izvēlieties valsti</option>';
+  EU_VALSTIS.forEach(v => { opts += '<option value="'+v+'">'+v+'</option>'; });
+  return opts;
+}
+
 function pieprasitOOTIS(btn) {
   btn.textContent = 'Ielādē...';
   btn.disabled = true;
@@ -703,12 +820,18 @@ function addB() {
         <div class="berns-fval"><input type="text" id="bc${id}-dzim" oninput="updateSum(${id})" placeholder="dd.mm.gggg."></div>
       </div>
       <div class="berns-frow">
+        <div class="berns-flbl" style="font-weight:400;">PMLP reģistrētā dzīvesvietas adrese <span class="ti">?</span></div>
+        <div class="berns-fval"><input type="text" readonly style="background:#f9f9f9;color:#555;"></div>
+      </div>
+      <div class="berns-frow">
+        <div class="berns-flbl" style="font-weight:400;">VSAA reģistrētā dzīvesvietas adrese <span class="ti">?</span></div>
+        <div class="berns-fval"><input type="text" readonly style="background:#f9f9f9;color:#555;"></div>
+      </div>
+      <div class="berns-frow">
         <div class="berns-flbl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
         <div class="berns-fval" style="max-width:100%;">
           <div class="addr-fields" id="addrB${id}">
-            <div class="addr-row"><label class="addr-lbl">PMLP reģistrētā dzīvesvietas adrese <span class="ti">?</span></label><input type="text" class="addr-inp m" readonly style="background:#f9f9f9;color:#555;"></div>
-            <div class="addr-row"><label class="addr-lbl">VSAA reģistrētā dzīvesvietas adrese <span class="ti">?</span></label><input type="text" class="addr-inp m" readonly style="background:#f9f9f9;color:#555;"></div>
-            <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><input type="text" class="addr-inp m" oninput="updateBernsAdrese(${id})"></div>
+            <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><select class="addr-inp m" onchange="updateBernsAdrese(${id})">${euOptionsHtml()}</select></div>
             <div class="addr-mode-btns" id="addrB${id}-btns">
               <button type="button" class="btn-addr-manual" onclick="showManual('addrB${id}')">Reģistrēt manuāli</button>
               <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
