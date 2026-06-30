@@ -156,7 +156,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
 /* BĒRNS CARD — summary table */
 .berns-card { border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; background: #fff; overflow: hidden; }
-.berns-summary { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 0; background: #fff; }
+.berns-summary { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr auto; gap: 0; background: #fff; }
 .berns-sum-head { font-size: 12px; font-weight: 700; color: #333; padding: 8px 10px 4px; border-bottom: 1px solid #eee; }
 .berns-sum-val { font-size: 12.5px; color: #222; padding: 6px 10px 8px; border-bottom: 1px solid #eee; }
 .berns-sum-del { display: flex; align-items: center; justify-content: center; padding: 6px 10px; border-bottom: 1px solid #eee; }
@@ -676,11 +676,13 @@ function addB() {
       <div class="berns-sum-head">Bērna vārds</div>
       <div class="berns-sum-head">Bērna uzvārds</div>
       <div class="berns-sum-head">Dzimšanas laiks</div>
+      <div class="berns-sum-head">Adrese</div>
       <div class="berns-sum-head"></div>
       <div class="berns-sum-val" id="bc${id}-sum-pk">–</div>
       <div class="berns-sum-val" id="bc${id}-sum-vards">–</div>
       <div class="berns-sum-val" id="bc${id}-sum-uzvards">–</div>
       <div class="berns-sum-val" id="bc${id}-sum-dzim">–</div>
+      <div class="berns-sum-val" id="bc${id}-sum-adrese">–</div>
       <div class="berns-sum-del"><button class="btn-dzest" onclick="rmB(${id})">Dzēst</button></div>
     </div>
     <div class="berns-fields">
@@ -706,14 +708,14 @@ function addB() {
           <div class="addr-fields" id="addrB${id}">
             <div class="addr-row"><label class="addr-lbl">PMLP reģistrētā dzīvesvietas adrese <span class="ti">?</span></label><input type="text" class="addr-inp m" readonly style="background:#f9f9f9;color:#555;"></div>
             <div class="addr-row"><label class="addr-lbl">VSAA reģistrētā dzīvesvietas adrese <span class="ti">?</span></label><input type="text" class="addr-inp m" readonly style="background:#f9f9f9;color:#555;"></div>
-            <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><input type="text" class="addr-inp m"></div>
+            <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><input type="text" class="addr-inp m" oninput="updateBernsAdrese(${id})"></div>
             <div class="addr-mode-btns" id="addrB${id}-btns">
               <button type="button" class="btn-addr-manual" onclick="showManual('addrB${id}')">Reģistrēt manuāli</button>
               <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
             </div>
-            <div class="addr-row addr-extra" id="addrB${id}-extra" style="display:none;"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp"></div>
-            <div class="addr-row addr-extra" id="addrB${id}-extra2" style="display:none;"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp"></div>
-            <div class="addr-row addr-extra" id="addrB${id}-extra3" style="display:none;"><label class="addr-lbl">Pasta indekss</label><input type="text" class="addr-inp n"></div>
+            <div class="addr-row addr-extra" id="addrB${id}-extra" style="display:none;"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp" oninput="updateBernsAdrese(${id})"></div>
+            <div class="addr-row addr-extra" id="addrB${id}-extra2" style="display:none;"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp" oninput="updateBernsAdrese(${id})"></div>
+            <div class="addr-row addr-extra" id="addrB${id}-extra3" style="display:none;"><label class="addr-lbl">Pasta indekss</label><input type="text" class="addr-inp n" oninput="updateBernsAdrese(${id})"></div>
           </div>
         </div>
       </div>
@@ -731,6 +733,17 @@ function updateSum(id) {
   if(vards) document.getElementById('bc'+id+'-sum-vards').textContent = vards.value || '–';
   if(uzvards) document.getElementById('bc'+id+'-sum-uzvards').textContent = uzvards.value || '–';
   if(dzim) document.getElementById('bc'+id+'-sum-dzim').textContent = dzim.value || '–';
+  updateBernsAdrese(id);
+}
+
+function updateBernsAdrese(id) {
+  const addrEl = document.getElementById('addrB'+id);
+  const sumEl = document.getElementById('bc'+id+'-sum-adrese');
+  if (!addrEl || !sumEl) return;
+  const inputs = addrEl.querySelectorAll('.addr-inp:not([readonly])');
+  const parts = [];
+  inputs.forEach(inp => { if (inp.value && inp.value.trim()) parts.push(inp.value.trim()); });
+  sumEl.textContent = parts.length ? parts.join(', ') : '–';
 }
 
 function saglabatBerns(id) {
