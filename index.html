@@ -187,6 +187,11 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
 .ootis-result { font-size: 13.5px; color: #222; padding: 8px 0 4px; }
 .ootis-result strong { color: #8b1a2e; }
+.ootis-doc-btns { display: flex; gap: 10px; margin-top: 10px; }
+.btn-doc-view, .btn-doc-del { padding: 7px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; }
+.btn-doc-view:hover, .btn-doc-del:hover { background: #fdf5f6; }
+.ootis-provider { padding: 12px 14px; background: #f7f7f7; border: 1px solid #e5e5e5; border-radius: 4px; margin: 8px 0; }
+.ootis-prov-h { font-size: 13.5px; font-weight: 700; color: #222; margin-bottom: 10px; }
 
 /* ADDRESS MODE BUTTONS */
 .addr-mode-btns { display: flex; gap: 10px; margin: 4px 0 12px; flex-wrap: wrap; }
@@ -739,24 +744,43 @@ function euOptionsHtml() {
 }
 
 function pieprasitOOTIS(btn) {
+  btn.classList.add('selected');
+  const btnsDiv = btn.parentElement;
+  const addrFields = btnsDiv.parentElement;
+  const prefix = addrFields.id;
+  // Hide extra address rows
+  ['extra','extra2','extra3'].forEach(s => {
+    const el = document.getElementById(prefix + '-' + s);
+    if (el) el.style.display = 'none';
+  });
+  // Remove any existing provider/result blocks
+  const existingProv = addrFields.querySelector('.ootis-provider');
+  if (existingProv) existingProv.remove();
+  const existingRes = addrFields.querySelector('.ootis-result');
+  if (existingRes) existingRes.remove();
+  // Show provider selection step
+  const prov = document.createElement('div');
+  prov.className = 'ootis-provider';
+  const uid = prefix + '-prov';
+  prov.innerHTML = `
+    <div class="ootis-prov-h">Izvēlieties apliecinājuma sniedzēju</div>
+    <label class="radio-opt" style="margin-bottom:12px;">
+      <input type="radio" name="${uid}" checked> Population Register (Population Registry Extract Proof Of Birth)
+    </label>
+    <div>
+      <button type="button" class="btn-piev-gray" onclick="pieprasitDatus(this)">Pieprasīt datus</button>
+    </div>
+  `;
+  addrFields.appendChild(prov);
+}
+
+function pieprasitDatus(btn) {
+  const provDiv = btn.closest('.ootis-provider');
+  const addrFields = provDiv.parentElement;
   btn.textContent = 'Ielādē...';
   btn.disabled = true;
   setTimeout(() => {
-    btn.textContent = 'Saņemt datus no OOTIS';
-    btn.disabled = false;
-    btn.classList.add('selected');
-    const btnsDiv = btn.parentElement;
-    const addrFields = btnsDiv.parentElement;
-    const prefix = addrFields.id;
-    // Hide extra address rows
-    ['extra','extra2','extra3'].forEach(s => {
-      const el = document.getElementById(prefix + '-' + s);
-      if (el) el.style.display = 'none';
-    });
-    // Remove any existing result
-    const existing = addrFields.querySelector('.ootis-result');
-    if (existing) existing.remove();
-    // Show document result
+    provDiv.remove();
     const now = new Date();
     const dd = String(now.getDate()).padStart(2,'0');
     const mm = String(now.getMonth()+1).padStart(2,'0');
@@ -764,9 +788,26 @@ function pieprasitOOTIS(btn) {
     const fname = 'ootis_' + yyyy + mm + dd + '.pdf';
     const result = document.createElement('div');
     result.className = 'ootis-result';
-    result.innerHTML = 'Saņemtais dokuments no OOTIS: <strong>' + fname + '</strong>';
+    result.innerHTML = 'Saņemtais dokuments no OOTIS: <strong>' + fname + '</strong>' +
+      '<div class="ootis-doc-btns">' +
+      '<button type="button" class="btn-doc-view" onclick="apskatitDokumentu(this)">Apskatīt dokumentu</button>' +
+      '<button type="button" class="btn-doc-del" onclick="dzestDokumentu(this)">Dzēst dokumentu</button>' +
+      '</div>';
     addrFields.appendChild(result);
   }, 800);
+}
+
+function apskatitDokumentu(btn) {
+  alert('Dokumenta priekšskatījums tiktu atvērts jaunā logā.');
+}
+
+function dzestDokumentu(btn) {
+  const resultDiv = btn.closest('.ootis-result');
+  const addrFields = resultDiv.parentElement;
+  const prefix = addrFields.id;
+  resultDiv.remove();
+  const otisBtn = document.querySelector('#' + prefix + '-btns .btn-addr-ootis');
+  if (otisBtn) otisBtn.classList.remove('selected');
 }
 
 function showManual(prefix) {
@@ -777,9 +818,18 @@ function showManual(prefix) {
   if (extra1) extra1.style.display = 'flex';
   if (extra2) extra2.style.display = 'flex';
   if (extra3) extra3.style.display = 'flex';
+  const addrFields = document.getElementById(prefix);
+  if (addrFields) {
+    const prov = addrFields.querySelector('.ootis-provider');
+    if (prov) prov.remove();
+    const res = addrFields.querySelector('.ootis-result');
+    if (res) res.remove();
+  }
   if (btns) {
     const manualBtn = btns.querySelector('.btn-addr-manual');
     if (manualBtn) manualBtn.classList.add('selected');
+    const ootisBtn = btns.querySelector('.btn-addr-ootis');
+    if (ootisBtn) ootisBtn.classList.remove('selected');
   }
 }
 
