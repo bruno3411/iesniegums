@@ -67,12 +67,12 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 .dv { border: none; border-top: 1px solid #e0e0e0; margin: 22px 0; }
 
 /* FIELD ROW */
-.fr { display: flex; align-items: flex-start; gap: 0; margin-bottom: 13px; }
-.fl { width: 310px; min-width: 260px; flex-shrink: 0; font-size: 13.5px; color: #222; padding-top: 9px; padding-right: 14px; line-height: 1.4; }
+.fr { display: flex; flex-direction: column; align-items: flex-start; gap: 0; margin-bottom: 18px; }
+.fl { width: 100%; font-size: 13.5px; font-weight: 700; color: #222; padding-top: 0; padding-right: 0; padding-bottom: 6px; line-height: 1.4; }
 .fl .r { color: #8b1a2e; font-weight: 700; }
 .fl .ti { display: inline-flex; align-items: center; justify-content: center; width: 17px; height: 17px; border-radius: 50%; border: 1.5px solid #999; color: #777; font-size: 11px; font-weight: 700; cursor: pointer; margin-left: 2px; vertical-align: middle; }
-.fv { flex: 1; }
-.fv input, .fv textarea, .fv select { width: 100%; border: 1px solid #ccc; border-radius: 3px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.15s; }
+.fv { width: 100%; }
+.fv input, .fv textarea, .fv select { width: 100%; max-width: 480px; border: 1px solid #ccc; border-radius: 3px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.15s; }
 .fv input:focus, .fv textarea:focus { border-color: #8b1a2e; }
 .fv input.n { max-width: 180px; }
 .fv input.m { max-width: 340px; }
@@ -170,6 +170,18 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 .berns-fval { flex: 1; }
 .berns-fval input { width: 100%; max-width: 340px; border: 1px solid #ccc; border-radius: 3px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.15s; }
 .berns-fval input:focus { border-color: #8b1a2e; }
+
+/* STACKED FIELD (label above, full-width input, helper text below) */
+.stk-field { margin-bottom: 18px; }
+.stk-lbl { font-size: 13.5px; font-weight: 700; color: #222; margin-bottom: 6px; }
+.stk-lbl .r { color: #8b1a2e; font-weight: 700; }
+.stk-field input { width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 10px 12px; font-size: 14px; font-family: inherit; color: #111; background: #fff; outline: none; transition: border-color 0.15s; }
+.stk-field input:focus { border-color: #8b1a2e; }
+.stk-help { display: flex; align-items: flex-start; gap: 6px; margin-top: 6px; font-size: 12px; color: #666; line-height: 1.5; }
+.stk-help .hi { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; border: 1.3px solid #999; color: #777; font-size: 10px; font-weight: 700; flex-shrink: 0; margin-top: 1px; font-style: normal; }
+.btn-piev-gray { padding: 9px 22px; border-radius: 4px; border: none; background: #6b6b6b; color: #fff; font-size: 13.5px; font-weight: 500; cursor: pointer; font-family: inherit; margin-top: 4px; }
+.btn-piev-gray:hover { background: #555; }
+.stk-section-h { font-size: 14.5px; font-weight: 700; color: #111; margin: 22px 0 14px; }
 .btn-saglabat { margin: 4px 0 14px 0; padding: 8px 22px; border-radius: 20px; border: 1.5px solid #c8a84b; background: #fff; color: #8b7020; font-size: 13px; font-weight: 500; cursor: pointer; font-family: inherit; }
 .btn-saglabat:hover { background: #fdf9ec; }
 
@@ -275,14 +287,16 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
         <div class="cb-txt">savas dzīvesvietas ārvalstī maiņu, kuras adrese norādīta šajā iesniegumā</div>
       </div>
       <div class="cb-bdy">
-        <div class="fr">
-          <div class="fl" style="font-weight:400;">PMLP reģistrētā dzīvesvietas adrese <span class="ti">?</span></div>
-          <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
+        <div class="stk-field">
+          <div class="stk-lbl" style="font-weight:400;">PMLP reģistrētā dzīvesvietas adrese</div>
+          <input type="text" readonly style="background:#f9f9f9;color:#555;">
+          <div class="stk-help"><span class="hi">i</span>Automātiski aizpildīta informācija no Pilsonības un migrācijas lietu pārvaldes reģistra.</div>
         </div>
 
-        <div class="fr">
-          <div class="fl" style="font-weight:400;">VSAA reģistrētā dzīvesvietas adrese <span class="ti">?</span></div>
-          <div class="fv"><input type="text" class="m" readonly style="background:#f9f9f9;color:#555;"></div>
+        <div class="stk-field">
+          <div class="stk-lbl" style="font-weight:400;">VSAA reģistrētā dzīvesvietas adrese</div>
+          <input type="text" readonly style="background:#f9f9f9;color:#555;">
+          <div class="stk-help"><span class="hi">i</span>Automātiski aizpildīta informācija no VSAA informācijas sistēmā reģistrētajiem datiem.</div>
         </div>
 
         <div class="fr">
@@ -359,7 +373,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
       </div>
       <div class="cb-bdy">
         <div id="blist"></div>
-        <button class="btn-add" type="button" onclick="addB()">Pievienot nākamo</button>
+        <button class="btn-piev-gray" type="button" onclick="addB()">Pievienot nākamo</button>
       </div>
     </div>
 
@@ -615,7 +629,10 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
           </div>
           <div class="fr">
             <div class="fl">Konta Nr. <span class="r">*</span></div>
-            <div class="fv"><input type="text" placeholder="LVXX XXXX XXXX XXXX XXXX X"></div>
+            <div class="fv">
+              <input type="text" placeholder="LVXX XXXX XXXX XXXX XXXX X">
+              <div class="hint" style="font-style:normal;display:flex;align-items:flex-start;gap:6px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1.3px solid #999;color:#777;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px;">i</span>Norādiet Latvijā reģistrētas kredītiestādes, Pasta norēķinu sistēmas vai tai līdzvērtīga citā valstī reģistrēta maksājumu pakalpojumu sniedzēja kontu, uz kuru vēlaties saņemt pakalpojumu.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -663,14 +680,16 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
     <div class="sec-h">Kontaktinformācija<span class="r">*</span></div>
 
-    <div class="fr">
-      <div class="fl">Mobilais tālrunis: (+371) <span class="ti">?</span></div>
-      <div class="fv"><input type="tel" class="m"></div>
+    <div class="stk-field">
+      <div class="stk-lbl">Mobilais tālrunis: (+371) <span class="r">*</span></div>
+      <input type="tel" style="max-width:400px;">
+      <div class="stk-help"><span class="hi">i</span>Norādiet mobilā tālruņa numuru, uz kuru VSAA nepieciešamības gadījumā varētu ar Jums sazināties.</div>
     </div>
 
-    <div class="fr">
-      <div class="fl">E-pasta adrese: <span class="ti">?</span></div>
-      <div class="fv"><input type="email" class="m"></div>
+    <div class="stk-field">
+      <div class="stk-lbl">E-pasta adrese:</div>
+      <input type="email" style="max-width:400px;">
+      <div class="stk-help"><span class="hi">i</span>Norādiet e-pasta adresi, uz kuru vēlaties saņemt informāciju par iesnieguma izskatīšanas gaitu.</div>
     </div>
 
     <hr class="dv">
@@ -803,29 +822,35 @@ function addB() {
       <div class="berns-sum-del"><button class="btn-dzest" onclick="rmB(${id})">Dzēst</button></div>
     </div>
     <div class="berns-fields">
-      <div class="berns-frow">
-        <div class="berns-flbl">Bērna personas kods:<span class="r">*</span> <span class="ti">?</span></div>
-        <div class="berns-fval"><input type="text" id="bc${id}-pk" oninput="updateSum(${id})" placeholder="______-_____"></div>
+      <div class="stk-field">
+        <div class="stk-lbl">Bērna personas kods: <span class="r">*</span></div>
+        <input type="text" id="bc${id}-pk" oninput="updateSum(${id})" placeholder="______-_____">
+        <div class="stk-help"><span class="hi">i</span>Norādiet bērna, par kuru pieprasāt pakalpojumu, personas kodu formātā xxxxxxxxxxx.</div>
       </div>
-      <div class="berns-frow">
-        <div class="berns-flbl">Bērna vārds:<span class="r">*</span> <span class="ti">?</span></div>
-        <div class="berns-fval"><input type="text" id="bc${id}-vards" oninput="updateSum(${id})"></div>
+      <div class="stk-field">
+        <div class="stk-lbl">Bērna vārds: <span class="r">*</span></div>
+        <input type="text" id="bc${id}-vards" oninput="updateSum(${id})">
+        <div class="stk-help"><span class="hi">i</span>Norādiet bērna, par kuru pieprasāt pakalpojumu, vārdu.</div>
       </div>
-      <div class="berns-frow">
-        <div class="berns-flbl">Bērna uzvārds:<span class="r">*</span> <span class="ti">?</span></div>
-        <div class="berns-fval"><input type="text" id="bc${id}-uzvards" oninput="updateSum(${id})"></div>
+      <div class="stk-field">
+        <div class="stk-lbl">Bērna uzvārds: <span class="r">*</span></div>
+        <input type="text" id="bc${id}-uzvards" oninput="updateSum(${id})">
+        <div class="stk-help"><span class="hi">i</span>Norādiet bērna, par kuru pieprasāt pakalpojumu, uzvārdu.</div>
       </div>
-      <div class="berns-frow">
-        <div class="berns-flbl">Dzimšanas laiks: <span class="ti">?</span></div>
-        <div class="berns-fval"><input type="text" id="bc${id}-dzim" oninput="updateSum(${id})" placeholder="dd.mm.gggg."></div>
+      <div class="stk-field">
+        <div class="stk-lbl">Dzimšanas laiks:</div>
+        <input type="text" id="bc${id}-dzim" oninput="updateSum(${id})" placeholder="dd.mm.gggg.">
+        <div class="stk-help"><span class="hi">i</span>Norādiet bērna dzimšanas datumu formātā dd.mm.gggg.</div>
       </div>
-      <div class="berns-frow">
-        <div class="berns-flbl" style="font-weight:400;">PMLP reģistrētā dzīvesvietas adrese <span class="ti">?</span></div>
-        <div class="berns-fval"><input type="text" readonly style="background:#f9f9f9;color:#555;"></div>
+      <div class="stk-field">
+        <div class="stk-lbl" style="font-weight:400;">PMLP reģistrētā dzīvesvietas adrese</div>
+        <input type="text" readonly style="background:#f9f9f9;color:#555;">
+        <div class="stk-help"><span class="hi">i</span>Automātiski aizpildīta informācija no Pilsonības un migrācijas lietu pārvaldes reģistra.</div>
       </div>
-      <div class="berns-frow">
-        <div class="berns-flbl" style="font-weight:400;">VSAA reģistrētā dzīvesvietas adrese <span class="ti">?</span></div>
-        <div class="berns-fval"><input type="text" readonly style="background:#f9f9f9;color:#555;"></div>
+      <div class="stk-field">
+        <div class="stk-lbl" style="font-weight:400;">VSAA reģistrētā dzīvesvietas adrese</div>
+        <input type="text" readonly style="background:#f9f9f9;color:#555;">
+        <div class="stk-help"><span class="hi">i</span>Automātiski aizpildīta informācija no VSAA informācijas sistēmā reģistrētajiem datiem.</div>
       </div>
       <div class="berns-frow">
         <div class="berns-flbl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
