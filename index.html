@@ -375,6 +375,10 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
                   <option value="Zviedrija">Zviedrija</option>
                 </select>
               </div>
+              <div class="addr-row">
+                <label class="addr-lbl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</label>
+                <input type="text" class="addr-inp m">
+              </div>
               <div class="addr-mode-btns" id="addr1-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr1')">Reģistrēt manuāli</button>
                 <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Izgūt tiešsaistē <span class="eu-flag-icon">🇪🇺</span></button>
@@ -462,6 +466,10 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
                   <option value="Zviedrija">Zviedrija</option>
                 </select>
               </div>
+              <div class="addr-row">
+                <label class="addr-lbl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</label>
+                <input type="text" class="addr-inp m">
+              </div>
             </div>
           </div>
         </div>
@@ -538,6 +546,10 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
                   <option value="Zviedrija">Zviedrija</option>
                 </select>
               </div>
+              <div class="addr-row">
+                <label class="addr-lbl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</label>
+                <input type="text" class="addr-inp m">
+              </div>
             </div>
           </div>
         </div>
@@ -602,6 +614,10 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
                   <option value="Spānija">Spānija</option>
                   <option value="Zviedrija">Zviedrija</option>
                 </select>
+              </div>
+              <div class="addr-row">
+                <label class="addr-lbl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</label>
+                <input type="text" class="addr-inp m">
               </div>
             </div>
           </div>
@@ -835,7 +851,6 @@ function addB() {
         <span><strong>Personas kods:</strong> <span id="bc${id}-sum-pk"></span></span>
         <span><strong>Vārds:</strong> <span id="bc${id}-sum-vards"></span></span>
         <span><strong>Uzvārds:</strong> <span id="bc${id}-sum-uzvards"></span></span>
-        <span><strong>Dzimšanas laiks:</strong> <span id="bc${id}-sum-dzim"></span></span>
       </div>
       <div class="bs2-row2">
         <span><strong>Adrese:</strong> <span id="bc${id}-sum-adrese"></span></span>
@@ -853,11 +868,6 @@ function addB() {
         </select>
       </div>
       <div class="stk-field">
-        <div class="stk-lbl">Dzimšanas laiks:</div>
-        <input type="text" id="bc${id}-dzim" oninput="updateSum(${id})" placeholder="dd.mm.gggg.">
-        <div class="stk-help"><span class="hi">i</span>Norādiet bērna dzimšanas datumu formātā dd.mm.gggg.</div>
-      </div>
-      <div class="stk-field">
         <div class="stk-lbl" style="font-weight:400;">PMLP reģistrētā dzīvesvietas adrese</div>
         <input type="text" readonly style="background:#f9f9f9;color:#555;">
         <div class="stk-help"><span class="hi">i</span>Automātiski aizpildīta informācija no Pilsonības un migrācijas lietu pārvaldes reģistra.</div>
@@ -872,6 +882,7 @@ function addB() {
         <div class="fv" style="max-width:100%;">
           <div class="addr-fields" id="addrB${id}">
             <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><select class="addr-inp m" onchange="updateBernsAdrese(${id})">${euOptionsHtml()}</select></div>
+            <div class="addr-row"><label class="addr-lbl">Citā valstī piešķirtais identifikācijas/sociālās apdrošināšanas numurs</label><input type="text" class="addr-inp m"></div>
             <div class="addr-mode-btns" id="addrB${id}-btns">
               <button type="button" class="btn-addr-manual" onclick="showManual('addrB${id}')">Reģistrēt manuāli</button>
               <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Izgūt tiešsaistē <span class="eu-flag-icon">🇪🇺</span></button>
@@ -902,15 +913,12 @@ function updateSum(id) {
   const pk = box ? box.dataset.pk : '';
   const vards = box ? box.dataset.vards : '';
   const uzvards = box ? box.dataset.uzvards : '';
-  const dzim = document.getElementById('bc'+id+'-dzim');
   const sumPk = document.getElementById('bc'+id+'-sum-pk');
   const sumVards = document.getElementById('bc'+id+'-sum-vards');
   const sumUzvards = document.getElementById('bc'+id+'-sum-uzvards');
-  const sumDzim = document.getElementById('bc'+id+'-sum-dzim');
   if (sumPk) sumPk.textContent = pk || '–';
   if (sumVards) sumVards.textContent = vards || '–';
   if (sumUzvards) sumUzvards.textContent = uzvards || '–';
-  if (sumDzim) sumDzim.textContent = (dzim && dzim.value) ? dzim.value : '–';
   updateBernsAdrese(id);
 }
 
