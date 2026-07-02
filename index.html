@@ -113,6 +113,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 /* DOCS */
 .docs-note { font-size: 12.5px; color: #666; font-style: italic; margin-bottom: 10px; }
 .doc-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.doc-card { border: 1px solid #e0e0e0; border-radius: 4px; padding: 16px; margin-bottom: 12px; background: #fff; }
 .doc-row input { flex: 1; border: 1px solid #ccc; border-radius: 3px; padding: 8px 10px; font-size: 13.5px; font-family: inherit; outline: none; }
 .doc-row input:focus { border-color: #8b1a2e; }
 .btn-rmd { background: none; border: none; font-size: 17px; color: #bbb; cursor: pointer; }
@@ -157,6 +158,13 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 /* BĒRNS CARD — summary table */
 .berns-card { border: 1px solid #ddd; border-radius: 4px; margin-bottom: 10px; background: #fff; overflow: hidden; }
 .berns-summary { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1.4fr auto; gap: 0; background: #fff; }
+
+/* TWO-ROW SUMMARY (shown after Saglabāt) */
+.berns-summary2 { padding: 14px 16px; background: #fff; border-bottom: 1px solid #eee; }
+.bs2-row1 { display: flex; flex-wrap: wrap; gap: 22px; font-size: 13px; color: #222; margin-bottom: 8px; }
+.bs2-row1 strong { font-weight: 700; color: #444; margin-right: 4px; }
+.bs2-row2 { display: flex; align-items: center; justify-content: space-between; gap: 14px; font-size: 13px; color: #222; }
+.bs2-row2 strong { font-weight: 700; color: #444; margin-right: 4px; }
 .berns-sum-head { font-size: 12px; font-weight: 700; color: #333; padding: 8px 10px 4px; border-bottom: 1px solid #eee; }
 .berns-sum-val { font-size: 12.5px; color: #222; padding: 6px 10px 8px; border-bottom: 1px solid #eee; }
 .berns-sum-del { display: flex; align-items: center; justify-content: center; padding: 6px 10px; border-bottom: 1px solid #eee; }
@@ -195,12 +203,13 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
 /* ADDRESS MODE BUTTONS */
 .addr-mode-btns { display: flex; gap: 10px; margin: 4px 0 12px; flex-wrap: wrap; }
-.btn-addr-manual, .btn-addr-ootis { padding: 7px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.12s; }
+.btn-addr-manual, .btn-addr-ootis { padding: 7px 16px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.12s; display: inline-flex; align-items: center; gap: 8px; }
 .btn-addr-manual { border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; }
 .btn-addr-manual:hover { background: #fdf5f6; }
 .btn-addr-ootis { border: 1.5px solid #8b1a2e; background: #fff; color: #8b1a2e; }
 .btn-addr-ootis:hover { background: #fdf5f6; }
 .btn-addr-manual.selected, .btn-addr-ootis.selected { background: #8b1a2e; color: #fff; }
+.eu-flag-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; font-size: 12px; overflow: hidden; flex-shrink: 0; }
 
 /* ERROR LINE */
 .erl { display: flex; align-items: flex-start; gap: 8px; margin-top: 24px; font-size: 13px; color: #555; }
@@ -285,6 +294,33 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
 
     <div class="sec-h">Informēju par (norādīt attiecīgās izmaiņas):</div>
 
+    <!-- 1 (moved to first) — open -->
+    <div class="cb-blk open" id="b6">
+      <div class="cb-trig" onclick="tog('b6',this)">
+        <input type="checkbox" checked onchange="syn('b6',this)" onclick="event.stopPropagation()">
+        <div class="cb-txt">
+          kredītiestādes/maksājumu iestādes konta maiņu uz kuru turpmāk pārskaitīt manu
+          <span class="sub">(norādīt Latvijā piešķirtās pensijas/pabalsta/atlīdzības veidu)</span>
+        </div>
+      </div>
+      <div class="cb-bdy">
+        <div class="fr">
+          <div class="fl">Pensijas/pabalsta/atlīdzības veids <span class="r">*</span></div>
+          <div class="fv">
+            <input type="text">
+            <div class="hint">(norādīt Latvijā piešķirtās pensijas/pabalsta/atlīdzības veidu)</div>
+          </div>
+        </div>
+        <div class="fr">
+          <div class="fl">Kredītiestādes/maksājumu iestādes pilns nosaukums <span class="r">*</span></div>
+          <div class="fv">
+            <input type="text">
+            <div class="hint" style="font-style:normal;display:flex;align-items:flex-start;gap:6px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1.3px solid #999;color:#777;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px;">i</span>Norādiet Latvijā reģistrētas kredītiestādes, Pasta norēķinu sistēmas vai tai līdzvērtīga citā valstī reģistrēta maksājumu pakalpojumu sniedzēja nosaukumu, uz kuru vēlaties saņemt pakalpojumu.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 1 — open -->
     <div class="cb-blk open" id="b1">
       <div class="cb-trig" onclick="tog('b1',this)">
@@ -341,7 +377,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
               </div>
               <div class="addr-mode-btns" id="addr1-btns">
                 <button type="button" class="btn-addr-manual" onclick="showManual('addr1')">Reģistrēt manuāli</button>
-                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
+                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Izgūt tiešsaistē <span class="eu-flag-icon">🇪🇺</span></button>
               </div>
               <div class="addr-row addr-extra" id="addr1-extra" style="display:none;">
                 <label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label>
@@ -426,10 +462,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
                   <option value="Zviedrija">Zviedrija</option>
                 </select>
               </div>
-              <div class="addr-mode-btns" id="addr3-btns">
-                <button type="button" class="btn-addr-manual" onclick="showManual('addr3')">Reģistrēt manuāli</button>
-                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
-              </div>
             </div>
           </div>
         </div>
@@ -506,10 +538,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
                   <option value="Zviedrija">Zviedrija</option>
                 </select>
               </div>
-              <div class="addr-mode-btns" id="addr4-btns">
-                <button type="button" class="btn-addr-manual" onclick="showManual('addr4')">Reģistrēt manuāli</button>
-                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
-              </div>
             </div>
           </div>
         </div>
@@ -575,10 +603,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
                   <option value="Zviedrija">Zviedrija</option>
                 </select>
               </div>
-              <div class="addr-mode-btns" id="addr5-btns">
-                <button type="button" class="btn-addr-manual" onclick="showManual('addr5')">Reģistrēt manuāli</button>
-                <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
-              </div>
             </div>
           </div>
         </div>
@@ -605,44 +629,6 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
       </div>
     </div>
 
-    <!-- 6 — open -->
-    <div class="cb-blk open" id="b6">
-      <div class="cb-trig" onclick="tog('b6',this)">
-        <input type="checkbox" checked onchange="syn('b6',this)" onclick="event.stopPropagation()">
-        <div class="cb-txt">
-          kredītiestādes/maksājumu iestādes konta maiņu uz kuru turpmāk pārskaitīt manu
-          <span class="sub">(norādīt Latvijā piešķirtās pensijas/pabalsta/atlīdzības veidu)</span>
-        </div>
-      </div>
-      <div class="cb-bdy">
-        <div class="fr">
-          <div class="fl">Pensijas/pabalsta/atlīdzības veids <span class="r">*</span></div>
-          <div class="fv">
-            <input type="text">
-            <div class="hint">(norādīt Latvijā piešķirtās pensijas/pabalsta/atlīdzības veidu)</div>
-          </div>
-        </div>
-        <div class="bank-blk">
-          <div class="bank-lbl">Jaunā konta dati</div>
-          <div class="fr">
-            <div class="fl">Kredītiestādes/maksājumu iestādes pilns nosaukums <span class="r">*</span></div>
-            <div class="fv"><input type="text"></div>
-          </div>
-          <div class="fr">
-            <div class="fl">BIC vai SWIFT kods <span class="r">*</span></div>
-            <div class="fv"><input type="text" class="m"></div>
-          </div>
-          <div class="fr">
-            <div class="fl">Konta Nr. <span class="r">*</span></div>
-            <div class="fv">
-              <input type="text" placeholder="LVXX XXXX XXXX XXXX XXXX X">
-              <div class="hint" style="font-style:normal;display:flex;align-items:flex-start;gap:6px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1.3px solid #999;color:#777;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px;">i</span>Norādiet Latvijā reģistrētas kredītiestādes, Pasta norēķinu sistēmas vai tai līdzvērtīga citā valstī reģistrēta maksājumu pakalpojumu sniedzēja kontu, uz kuru vēlaties saņemt pakalpojumu.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- 7 -->
     <div class="cb-blk" id="b7">
       <div class="cb-trig" onclick="tog('b7',this)">
@@ -663,22 +649,9 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a
     <hr class="dv">
 
     <div class="sec-h">Iesniegumam pievienoju šādus dokumentus</div>
-    <div class="docs-note">* Jāpievieno informācijas izmaiņas apliecinoši dokumenti, ja tādi ir</div>
+    <div class="hint" style="font-style:normal;display:flex;align-items:flex-start;gap:6px;margin-bottom:14px;"><span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;border:1.3px solid #999;color:#777;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px;">i</span>Jāpievieno informācijas izmaiņas apliecinoši dokumenti, ja tādi ir.</div>
 
-    <div id="dlist">
-      <div class="doc-row">
-        <input type="text" placeholder="Dokumenta nosaukums / apraksts">
-        <button class="btn-rmd" onclick="rmDoc(this)">✕</button>
-      </div>
-      <div class="doc-row">
-        <input type="text" placeholder="Dokumenta nosaukums / apraksts">
-        <button class="btn-rmd" onclick="rmDoc(this)">✕</button>
-      </div>
-      <div class="doc-row">
-        <input type="text" placeholder="Dokumenta nosaukums / apraksts">
-        <button class="btn-rmd" onclick="rmDoc(this)">✕</button>
-      </div>
-    </div>
+    <div id="dlist"></div>
     <button class="btn-add" type="button" onclick="addDoc()" style="margin-top:4px;">+ Pievienot dokumentu</button>
 
     <hr class="dv">
@@ -857,35 +830,27 @@ function addB() {
   const d = document.createElement('div');
   d.className = 'berns-card'; d.id = 'bc' + id;
   d.innerHTML = `
-    <div class="berns-summary">
-      <div class="berns-sum-head">Bērna personas<br>kods</div>
-      <div class="berns-sum-head">Bērna vārds</div>
-      <div class="berns-sum-head">Bērna uzvārds</div>
-      <div class="berns-sum-head">Dzimšanas laiks</div>
-      <div class="berns-sum-head">Adrese</div>
-      <div class="berns-sum-head"></div>
-      <div class="berns-sum-val" id="bc${id}-sum-pk">–</div>
-      <div class="berns-sum-val" id="bc${id}-sum-vards">–</div>
-      <div class="berns-sum-val" id="bc${id}-sum-uzvards">–</div>
-      <div class="berns-sum-val" id="bc${id}-sum-dzim">–</div>
-      <div class="berns-sum-val" id="bc${id}-sum-adrese">–</div>
-      <div class="berns-sum-del"><button class="btn-dzest" onclick="rmB(${id})">Dzēst</button></div>
+    <div class="berns-summary2" id="bc${id}-summary" style="display:none;">
+      <div class="bs2-row1">
+        <span><strong>Personas kods:</strong> <span id="bc${id}-sum-pk"></span></span>
+        <span><strong>Vārds:</strong> <span id="bc${id}-sum-vards"></span></span>
+        <span><strong>Uzvārds:</strong> <span id="bc${id}-sum-uzvards"></span></span>
+        <span><strong>Dzimšanas laiks:</strong> <span id="bc${id}-sum-dzim"></span></span>
+      </div>
+      <div class="bs2-row2">
+        <span><strong>Adrese:</strong> <span id="bc${id}-sum-adrese"></span></span>
+        <button class="btn-dzest" onclick="rmB(${id})">Dzēst</button>
+      </div>
     </div>
-    <div class="berns-fields">
+    <div class="berns-fields" id="bc${id}-fields">
       <div class="stk-field">
-        <div class="stk-lbl">Bērna personas kods: <span class="r">*</span></div>
-        <input type="text" id="bc${id}-pk" oninput="updateSum(${id})" placeholder="______-_____">
-        <div class="stk-help"><span class="hi">i</span>Norādiet bērna, par kuru pieprasāt pakalpojumu, personas kodu formātā xxxxxxxxxxx.</div>
-      </div>
-      <div class="stk-field">
-        <div class="stk-lbl">Bērna vārds: <span class="r">*</span></div>
-        <input type="text" id="bc${id}-vards" oninput="updateSum(${id})">
-        <div class="stk-help"><span class="hi">i</span>Norādiet bērna, par kuru pieprasāt pakalpojumu, vārdu.</div>
-      </div>
-      <div class="stk-field">
-        <div class="stk-lbl">Bērna uzvārds: <span class="r">*</span></div>
-        <input type="text" id="bc${id}-uzvards" oninput="updateSum(${id})">
-        <div class="stk-help"><span class="hi">i</span>Norādiet bērna, par kuru pieprasāt pakalpojumu, uzvārdu.</div>
+        <div class="stk-lbl">Izvēlieties bērnu: <span class="r">*</span></div>
+        <select id="bc${id}-select" onchange="bernsSelected(${id})">
+          <option value="" selected disabled>Izvēlieties bērnu</option>
+          <option value="030512-12345|Jānis|Bērziņš">030512-12345 – Bērziņš Jānis</option>
+          <option value="150819-54321|Anna|Kalniņa">150819-54321 – Kalniņa Anna</option>
+          <option value="220310-98765|Mārtiņš|Ozoliņš">220310-98765 – Ozoliņš Mārtiņš</option>
+        </select>
       </div>
       <div class="stk-field">
         <div class="stk-lbl">Dzimšanas laiks:</div>
@@ -902,15 +867,14 @@ function addB() {
         <input type="text" readonly style="background:#f9f9f9;color:#555;">
         <div class="stk-help"><span class="hi">i</span>Automātiski aizpildīta informācija no VSAA informācijas sistēmā reģistrētajiem datiem.</div>
       </div>
-      <div class="berns-frow">
-        <div class="fr">
+      <div class="fr">
         <div class="fl">bērna dzīvesvietas adrese ārvalstī <span class="r">*</span></div>
         <div class="fv" style="max-width:100%;">
           <div class="addr-fields" id="addrB${id}">
             <div class="addr-row"><label class="addr-lbl">Valsts <span class="r">*</span></label><select class="addr-inp m" onchange="updateBernsAdrese(${id})">${euOptionsHtml()}</select></div>
             <div class="addr-mode-btns" id="addrB${id}-btns">
               <button type="button" class="btn-addr-manual" onclick="showManual('addrB${id}')">Reģistrēt manuāli</button>
-              <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Saņemt datus no OOTIS</button>
+              <button type="button" class="btn-addr-ootis" onclick="pieprasitOOTIS(this)">Izgūt tiešsaistē <span class="eu-flag-icon">🇪🇺</span></button>
             </div>
             <div class="addr-row addr-extra" id="addrB${id}-extra" style="display:none;"><label class="addr-lbl">Iela, mājas Nr. <span class="r">*</span></label><input type="text" class="addr-inp" oninput="updateBernsAdrese(${id})"></div>
             <div class="addr-row addr-extra" id="addrB${id}-extra2" style="display:none;"><label class="addr-lbl">Pilsēta/pagasts, novads <span class="r">*</span></label><input type="text" class="addr-inp" oninput="updateBernsAdrese(${id})"></div>
@@ -923,15 +887,30 @@ function addB() {
   lst.appendChild(d);
 }
 
+function bernsSelected(id) {
+  const sel = document.getElementById('bc'+id+'-select');
+  if (!sel || !sel.value) return;
+  const parts = sel.value.split('|');
+  const box = sel.closest('.berns-fields');
+  box.dataset.pk = parts[0];
+  box.dataset.vards = parts[1];
+  box.dataset.uzvards = parts[2];
+}
+
 function updateSum(id) {
-  const pk = document.getElementById('bc'+id+'-pk');
-  const vards = document.getElementById('bc'+id+'-vards');
-  const uzvards = document.getElementById('bc'+id+'-uzvards');
+  const box = document.getElementById('bc'+id+'-fields');
+  const pk = box ? box.dataset.pk : '';
+  const vards = box ? box.dataset.vards : '';
+  const uzvards = box ? box.dataset.uzvards : '';
   const dzim = document.getElementById('bc'+id+'-dzim');
-  if(pk) document.getElementById('bc'+id+'-sum-pk').textContent = pk.value || '–';
-  if(vards) document.getElementById('bc'+id+'-sum-vards').textContent = vards.value || '–';
-  if(uzvards) document.getElementById('bc'+id+'-sum-uzvards').textContent = uzvards.value || '–';
-  if(dzim) document.getElementById('bc'+id+'-sum-dzim').textContent = dzim.value || '–';
+  const sumPk = document.getElementById('bc'+id+'-sum-pk');
+  const sumVards = document.getElementById('bc'+id+'-sum-vards');
+  const sumUzvards = document.getElementById('bc'+id+'-sum-uzvards');
+  const sumDzim = document.getElementById('bc'+id+'-sum-dzim');
+  if (sumPk) sumPk.textContent = pk || '–';
+  if (sumVards) sumVards.textContent = vards || '–';
+  if (sumUzvards) sumUzvards.textContent = uzvards || '–';
+  if (sumDzim) sumDzim.textContent = (dzim && dzim.value) ? dzim.value : '–';
   updateBernsAdrese(id);
 }
 
@@ -946,19 +925,35 @@ function updateBernsAdrese(id) {
 }
 
 function saglabatBerns(id) {
+  const sel = document.getElementById('bc'+id+'-select');
+  if (!sel || !sel.value) {
+    alert('Lūdzu izvēlieties bērnu.');
+    return;
+  }
   updateSum(id);
+  const summary = document.getElementById('bc'+id+'-summary');
+  const fields = document.getElementById('bc'+id+'-fields');
+  if (summary) summary.style.display = 'block';
+  if (fields) fields.style.display = 'none';
 }
 function rmB(id) { const e = document.getElementById('bc'+id); if(e) e.remove(); }
 function addDoc() {
   const lst = document.getElementById('dlist');
-  const d = document.createElement('div'); d.className='doc-row';
-  d.innerHTML=`<input type="text" placeholder="Dokumenta nosaukums / apraksts"><button class="btn-rmd" onclick="rmDoc(this)">✕</button>`;
+  const d = document.createElement('div'); d.className='doc-card';
+  d.innerHTML=`
+    <div class="stk-field">
+      <div class="stk-lbl">Dokumenta nosaukums <span class="r">*</span></div>
+      <input type="text" placeholder="Dokumenta nosaukums">
+    </div>
+    <div class="stk-field">
+      <div class="stk-lbl">Apraksts</div>
+      <input type="text" placeholder="Apraksts">
+    </div>
+    <button class="btn-doc-del" type="button" onclick="rmDoc(this)">Dzēst pievienoto dokumentu</button>`;
   lst.appendChild(d);
 }
 function rmDoc(btn) {
-  const lst=document.getElementById('dlist');
-  if(lst.children.length>1) btn.parentElement.remove();
-  else btn.previousElementSibling.value='';
+  btn.closest('.doc-card').remove();
 }
 function sub() {
   if(!document.getElementById('cb-vecaki').checked || !document.getElementById('cb-patiesa').checked){
